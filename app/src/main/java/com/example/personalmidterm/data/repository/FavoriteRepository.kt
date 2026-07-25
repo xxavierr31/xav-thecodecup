@@ -6,6 +6,7 @@ import com.example.personalmidterm.model.Coffee
 import com.example.personalmidterm.model.Customization
 import com.example.personalmidterm.model.Favorite
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class FavoriteRepository(
@@ -19,9 +20,7 @@ class FavoriteRepository(
         }
     }
 
-    suspend fun toggleFavorite(coffee: Coffee, customization: Customization) {
-        // Simple implementation: just insert for now. 
-        // Real toggle would need to check if it already exists with these exact customizations.
+    suspend fun addFavorite(coffee: Coffee, customization: Customization) {
         favoriteDao.insertFavorite(
             FavoriteEntity(
                 coffeeId = coffee.id,
@@ -34,17 +33,15 @@ class FavoriteRepository(
         )
     }
 
-    suspend fun removeFavorite(favorite: Favorite) {
-        favoriteDao.deleteFavorite(
-            FavoriteEntity(
-                id = favorite.id,
-                coffeeId = favorite.coffee.id,
-                sweetness = favorite.customization.sweetness,
-                temperature = favorite.customization.temperature,
-                intensity = favorite.customization.intensity,
-                shots = favorite.customization.shots,
-                flavors = favorite.customization.flavors
-            )
-        )
+    suspend fun removeFavoriteByCoffeeId(coffeeId: Long) {
+        val favorites = favoriteDao.getAllFavorites().first()
+        val toDelete = favorites.filter { it.coffeeId == coffeeId }
+        toDelete.forEach { favoriteDao.deleteFavorite(it) }
+    }
+
+    suspend fun removeFavorite(favoriteId: Long) {
+        val favorites = favoriteDao.getAllFavorites().first()
+        val toDelete = favorites.find { it.id == favoriteId }
+        toDelete?.let { favoriteDao.deleteFavorite(it) }
     }
 }

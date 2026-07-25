@@ -46,6 +46,14 @@
             app:layout_constraintStart_toStartOf="@id/tab_ongoing"
             app:layout_constraintEnd_toEndOf="@id/tab_ongoing"
             app:layout_constraintTop_toBottomOf="@id/tab_ongoing" />
+        <View
+            android:id="@+id/tab_history_indicator"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/theme_brown"
+            app:layout_constraintStart_toStartOf="@id/tab_history"
+            app:layout_constraintEnd_toEndOf="@id/tab_history"
+            app:layout_constraintTop_toBottomOf="@id/tab_history" />
 
         <TextView
             android:id="@+id/tab_history"

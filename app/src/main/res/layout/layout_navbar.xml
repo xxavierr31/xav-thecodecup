@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
     <com.google.android.material.card.MaterialCardView
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="87dp"
         android:backgroundTint="#F8F3EC"
@@ -110,6 +110,7 @@
                     android:background="@android:color/transparent"
 
                     android:src="@drawable/home"
+                    android:tint="@color/text_secondary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -121,7 +122,8 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/manrope_medium"
                     android:text="Home"
-                    android:textColor="@color/theme_brown"
+
+                    android:textColor="@color/text_secondary"
                     android:textSize="10sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

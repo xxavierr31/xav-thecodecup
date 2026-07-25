@@ -124,12 +124,28 @@
                 app:layout_constraintEnd_toStartOf="@id/btn_edit_details"
                 app:layout_constraintTop_toBottomOf="@id/tag_badge_bg" />
 
+            <!-- EDIT (PENCIL) BUTTON — visible in display mode -->
             <ImageButton
                 android:id="@+id/btn_edit_details"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_edit_pencil"
+                app:tint="@color/theme_brown"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_details_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_details_title" />
+
+            <!-- SAVE (CHECK) BUTTON — visible in edit mode, hidden by default -->
+            <ImageButton
+                android:id="@+id/btn_save_details"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_check"
+                android:visibility="gone"
+                android:scaleType="fitCenter"
                 app:tint="@color/theme_brown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_details_title"
@@ -193,6 +209,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_email_label" />
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+                android:background="@null"
+                android:fontFamily="@font/manrope_regular"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="0dp"
+                android:text="elena.botanist@herbarium.co"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/icon_bg_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_email_label"
+                tools:visibility="visible" />
+
             <!-- PHONE ROW -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/icon_bg_phone"
@@ -239,8 +276,28 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/icon_bg_phone"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_phone_label" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="2dp"
+                android:background="@null"
+                android:fontFamily="@font/manrope_regular"
+                android:hint="Phone"
+                android:inputType="phone"
+                android:padding="0dp"
+                android:text="+1 234 567 8900"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/icon_bg_phone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_phone_label"
-                app:layout_constraintBottom_toTopOf="tv"/>
+                tools:visibility="visible" />
 
             <!-- HOME ADDRESS ROW -->
             <com.google.android.material.card.MaterialCardView
@@ -291,6 +348,27 @@
                 app:layout_constraintStart_toEndOf="@id/icon_bg_address"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_address_label" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_address_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="2dp"
+                android:background="@null"
+                android:fontFamily="@font/manrope_regular"
+                android:hint="Home Address"
+                android:inputType="textPostalAddress"
+                android:padding="0dp"
+                android:text="123 Willow Lane, Bloomsville"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/icon_bg_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_address_label"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

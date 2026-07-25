@@ -161,7 +161,9 @@
                 </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/layout_loyalty"/>
+            <include
+                android:id="@+id/loyalty_card"
+                layout="@layout/layout_loyalty" />
 
             <!-- Saved Recipes -->
             <TextView

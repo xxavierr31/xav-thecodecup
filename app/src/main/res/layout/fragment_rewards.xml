@@ -131,6 +131,7 @@
                 android:layout_marginTop="28dp"
                 android:fontFamily="@font/playfairdisplay_bold"
                 android:text="Recent Activity"
+                android:textColor="@color/text_primary"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@id/ic_history"
                 app:layout_constraintTop_toBottomOf="@id/loyalty_vine" />
