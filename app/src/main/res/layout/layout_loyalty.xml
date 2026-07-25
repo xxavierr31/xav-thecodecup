@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loyalty_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="24dp">
+
+<TextView
+    android:id="@+id/your_reward_header"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/playfairdisplay_bold"
+    android:text="Your Stamps"
+    android:textColor="@color/black"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:text="4/8 Blooming"
+    android:textSize="14sp"
+    android:textColor="@color/theme_maroon"
+    android:fontFamily="@font/manrope_bold"
+    app:layout_constraintBottom_toTopOf="@+id/loyalty_vine"/>
+
+<HorizontalScrollView
+    android:id="@+id/loyalty_vine"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:padding="24dp"
+    android:scrollbars="none"
+    android:background="@drawable/loyalty_bg"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/your_reward_header">
+
+    <LinearLayout
+        android:id="@+id/stamps_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- 8 Stamp slots -->
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" />
+    </LinearLayout>
+</HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
