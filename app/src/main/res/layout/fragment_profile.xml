@@ -46,8 +46,8 @@
                     android:id="@+id/iv_profile_photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:src="@drawable/coffee_1" />
+                    android:scaleType="centerInside"
+                    tools:src="@drawable/profile" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -58,13 +58,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/playfairdisplay_bold"
-                android:text="Elena"
+                android:text="User"
                 android:textColor="@color/text_primary"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_photo_bg" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_edit_underline"
+                android:fontFamily="@font/playfairdisplay_bold"
+                android:gravity="center"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="8dp"
+                android:text="User"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_photo_bg"
+                tools:visibility="visible" />
 
             <!-- TAG BADGE -->
             <com.google.android.material.card.MaterialCardView
@@ -215,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:background="@null"
+                android:background="@drawable/bg_edit_underline"
                 android:fontFamily="@font/manrope_regular"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
@@ -284,7 +306,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="2dp"
-                android:background="@null"
+                android:background="@drawable/bg_edit_underline"
                 android:fontFamily="@font/manrope_regular"
                 android:hint="Phone"
                 android:inputType="phone"
@@ -355,7 +377,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="2dp"
-                android:background="@null"
+                android:background="@drawable/bg_edit_underline"
                 android:fontFamily="@font/manrope_regular"
                 android:hint="Home Address"
                 android:inputType="textPostalAddress"

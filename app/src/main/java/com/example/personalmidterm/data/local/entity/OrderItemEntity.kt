@@ -1,5 +1,6 @@
 package com.example.personalmidterm.data.local.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.personalmidterm.model.*
@@ -12,7 +13,7 @@ data class OrderItemEntity(
     val coffeeImageRes: Int,
     val sweetness: Sweetness,
     val temperature: Temperature,
-    val intensity: Intensity,
+    @ColumnInfo(name = "intensity") val temperatureLevel: TemperatureLevel,
     val shots: Int,
     val flavors: List<Flavor>,
     val quantity: Int,
@@ -26,7 +27,7 @@ data class OrderItemEntity(
         customization = Customization(
             sweetness = sweetness,
             temperature = temperature,
-            intensity = intensity,
+            temperatureLevel = temperatureLevel,
             shots = shots,
             flavors = flavors
         ),

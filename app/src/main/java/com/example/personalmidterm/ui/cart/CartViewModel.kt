@@ -32,9 +32,40 @@ class CartViewModel(
         rankTiers.getOrNull(state.rankIndex)?.discountPercent ?: 0.0
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0.0)
 
-    val total: StateFlow<Long> = combine(subtotal, discount) { subtotal, discount ->
-        (subtotal * (1.0 - discount)).toLong()
+    val rankName: StateFlow<String> = loyaltyState.map { state ->
+        rankTiers.getOrNull(state.rankIndex)?.rank ?: "Sprout"
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "Sprout")
+
+    val discountAmount: StateFlow<Long> = combine(subtotal, discount) { subtotal, discount ->
+        (subtotal * discount).toLong()
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
+
+    val total: StateFlow<Long> = combine(subtotal, discountAmount) { subtotal, amount ->
+        subtotal - amount
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
+
+    data class DiscountUiState(
+        val rankName: String = "Sprout",
+        val discountPercent: Int = 0,
+        val discountAmount: Long = 0L,
+        val subtotal: Long = 0L,
+        val isVisible: Boolean = false
+    )
+
+    val discountUiState: StateFlow<DiscountUiState> = combine(
+        rankName,
+        discount,
+        discountAmount,
+        subtotal
+    ) { name, disc, amount, sub ->
+        DiscountUiState(
+            rankName = name,
+            discountPercent = (disc * 100).toInt(),
+            discountAmount = amount,
+            subtotal = sub,
+            isVisible = disc > 0
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DiscountUiState())
 
     fun updateQuantity(item: CartItem, delta: Int) {
         viewModelScope.launch {

@@ -103,6 +103,7 @@
                     android:paddingHorizontal="28dp"
                     android:paddingVertical="10dp"
                     android:text="Browse Menu"
+                    android:fontFamily="@font/manrope_bold"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -123,36 +124,85 @@
         android:id="@+id/bottom_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/card_cream"
+        android:background="@drawable/bg_header"
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- ROW 1: discount label + value -->
+        <TextView
+            android:id="@+id/tv_rank_perk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_bold"
+            android:text="Naturalist (5% off)"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_rank_perk_val"
+            app:layout_constraintTop_toTopOf="@id/tv_rank_perk_val"
+            app:layout_constraintBottom_toBottomOf="@id/tv_rank_perk_val" />
+
+        <TextView
+            android:id="@+id/tv_rank_perk_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/manrope_medium"
+            android:text="-10.000d"
+            android:textColor="@color/theme_green_badge"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/divider_light"
+            app:layout_constraintTop_toBottomOf="@id/tv_rank_perk_val"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- ROW 2: total label + old total (strikethrough) + new total -->
         <TextView
             android:id="@+id/tv_estimated_total_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/manrope_medium"
-            android:text="Estimated Total"
+            android:fontFamily="@font/manrope_bold"
+            android:text="Total"
             android:textColor="@color/text_secondary"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_old_total_val"
+            app:layout_constraintBottom_toBottomOf="@id/tv_estimated_total_val" />
+
+        <TextView
+            android:id="@+id/tv_old_total_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/playfairdisplay_medium"
+            android:text="110.000"
+            android:textColor="@color/theme_muted"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@id/tv_estimated_total_val"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_estimated_total_val" />
 
         <TextView
             android:id="@+id/tv_estimated_total_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/playfairdisplay_bold"
             android:text="100.000d"
             android:textColor="@color/theme_brown"
-            android:textSize="28sp"
+            android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_goneMarginTop="0dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_checkout"
@@ -163,6 +213,7 @@
             android:insetBottom="0dp"
             android:paddingVertical="16dp"
             android:text="Proceed to Checkout"
+            android:fontFamily="@font/manrope_bold"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="14sp"

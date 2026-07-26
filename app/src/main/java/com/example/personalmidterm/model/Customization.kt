@@ -13,10 +13,12 @@ enum class Temperature(val label: String) {
     ICED("Iced")
 }
 
-enum class Intensity(val label: String) {
-    LOW("Low"),
-    MEDIUM("Medium"),
-    HIGH("High")
+enum class TemperatureLevel(val label: String) {
+    ZERO("0%"),
+    TWENTY_FIVE("25%"),
+    FIFTY("50%"),
+    SEVENTY_FIVE("75%"),
+    HUNDRED("100%")
 }
 
 enum class Flavor(val label: String, val price: Long) {
@@ -28,7 +30,7 @@ enum class Flavor(val label: String, val price: Long) {
 data class Customization(
     val sweetness: Sweetness = Sweetness.FIFTY,
     val temperature: Temperature = Temperature.ICED,
-    val intensity: Intensity = Intensity.MEDIUM,
+    val temperatureLevel: TemperatureLevel = TemperatureLevel.FIFTY,
     val shots: Int = 1,
     val flavors: List<Flavor> = emptyList()
 )

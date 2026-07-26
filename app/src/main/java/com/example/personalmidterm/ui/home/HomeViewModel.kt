@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.personalmidterm.data.prefs.LoyaltyPrefs
 import com.example.personalmidterm.data.repository.CoffeeRepository
 import com.example.personalmidterm.data.repository.FavoriteRepository
+import com.example.personalmidterm.data.repository.ProfileRepository
 import com.example.personalmidterm.model.Category
 import com.example.personalmidterm.model.Coffee
 import com.example.personalmidterm.model.Favorite
@@ -14,8 +15,11 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val coffeeRepository: CoffeeRepository,
     private val favoriteRepository: FavoriteRepository,
-    private val loyaltyPrefs: LoyaltyPrefs
+    private val loyaltyPrefs: LoyaltyPrefs,
+    private val profileRepository: ProfileRepository
 ) : ViewModel() {
+    
+    val profile = profileRepository.profile
 
     private val _heroCoffee = MutableStateFlow<Coffee?>(null)
     val heroCoffee: StateFlow<Coffee?> = _heroCoffee.asStateFlow()

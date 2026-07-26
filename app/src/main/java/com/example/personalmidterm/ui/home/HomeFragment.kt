@@ -38,8 +38,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
+        setupHeader()
         setupRecyclerView()
         observeViewModel()
+    }
+
+    private fun setupHeader() {
+        binding.header.userAvatar.visibility = View.VISIBLE
+        binding.header.greetingContainer.visibility = View.VISIBLE
+        binding.header.cartIcon.visibility = View.VISIBLE
+        
+        binding.header.userAvatar.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
+        binding.header.cartIcon.setOnClickListener {
+            findNavController().navigate(R.id.cartFragment)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -70,6 +84,11 @@ class HomeFragment : Fragment() {
                 launch {
                     viewModel.loyaltyState.collect { state ->
                         updateLoyaltyUi(state.stamps)
+                    }
+                }
+                launch {
+                    viewModel.profile.collect { profile ->
+                        binding.header.greetingText.text = "Good Morning, ${profile.name}"
                     }
                 }
             }

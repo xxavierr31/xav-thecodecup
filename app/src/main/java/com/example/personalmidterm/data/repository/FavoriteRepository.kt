@@ -26,7 +26,7 @@ class FavoriteRepository(
                 coffeeId = coffee.id,
                 sweetness = customization.sweetness,
                 temperature = customization.temperature,
-                intensity = customization.intensity,
+                temperatureLevel = customization.temperatureLevel,
                 shots = customization.shots,
                 flavors = customization.flavors
             )

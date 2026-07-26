@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalmidterm.databinding.ItemCartBinding
 import com.example.personalmidterm.model.CartItem
+import com.example.personalmidterm.model.Temperature
 import com.example.personalmidterm.util.CurrencyFormatter
 
 class CartAdapter(
@@ -43,7 +44,11 @@ class CartAdapter(
             
             val customizationText = buildString {
                 append("${item.customization.temperature.label}, ")
-                append("${item.customization.sweetness.label} Sweet")
+                append("${item.customization.sweetness.label} Sweet, ")
+                
+                val levelLabel = if (item.customization.temperature == Temperature.ICED) "Ice" else "Heat"
+                append("${item.customization.temperatureLevel.label} $levelLabel")
+                
                 if (item.customization.flavors.isNotEmpty()) {
                     append(", ")
                     append(item.customization.flavors.joinToString(", ") { it.label })

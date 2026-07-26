@@ -252,22 +252,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- INTENSITY -->
+            <!-- TEMPERATURE LEVEL -->
             <TextView
-                android:id="@+id/tv_intensity_label"
+                android:id="@+id/tv_temp_level_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/manrope_medium"
-                android:text="Intensity"
+                android:text="Ice Level"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_intensity_value"
+                app:layout_constraintEnd_toStartOf="@id/tv_temp_level_value"
                 app:layout_constraintTop_toBottomOf="@id/temperature_toggle_bg" />
 
             <TextView
-                android:id="@+id/tv_intensity_value"
+                android:id="@+id/tv_temp_level_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_bold"
@@ -275,10 +275,10 @@
                 android:textColor="@color/theme_brown"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_intensity_label" />
+                app:layout_constraintTop_toTopOf="@id/tv_temp_level_label" />
 
             <com.google.android.material.slider.Slider
-                android:id="@+id/slider_intensity"
+                android:id="@+id/slider_temp_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -292,21 +292,21 @@
                 app:trackColorInactive="@color/divider_light"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_intensity_label" />
+                app:layout_constraintTop_toBottomOf="@id/tv_temp_level_label" />
 
             <TextView
-                android:id="@+id/tv_intensity_scale_none"
+                android:id="@+id/tv_temp_level_scale_none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_regular"
                 android:text="0%"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp"
-                app:layout_constraintStart_toStartOf="@id/slider_intensity"
-                app:layout_constraintTop_toBottomOf="@id/slider_intensity" />
+                app:layout_constraintStart_toStartOf="@id/slider_temp_level"
+                app:layout_constraintTop_toBottomOf="@id/slider_temp_level" />
 
             <TextView
-                android:id="@+id/tv_intensity_scale_25"
+                android:id="@+id/tv_temp_level_scale_25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_regular"
@@ -316,10 +316,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.25"
-                app:layout_constraintTop_toBottomOf="@id/slider_intensity" />
+                app:layout_constraintTop_toBottomOf="@id/slider_temp_level" />
 
             <TextView
-                android:id="@+id/tv_intensity_scale_50"
+                android:id="@+id/tv_temp_level_scale_50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_regular"
@@ -329,10 +329,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintTop_toBottomOf="@id/slider_intensity" />
+                app:layout_constraintTop_toBottomOf="@id/slider_temp_level" />
 
             <TextView
-                android:id="@+id/tv_intensity_scale_75"
+                android:id="@+id/tv_temp_level_scale_75"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_regular"
@@ -342,18 +342,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.75"
-                app:layout_constraintTop_toBottomOf="@id/slider_intensity" />
+                app:layout_constraintTop_toBottomOf="@id/slider_temp_level" />
 
             <TextView
-                android:id="@+id/tv_intensity_scale_full"
+                android:id="@+id/tv_temp_level_scale_full"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope_regular"
                 android:text="100%"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="@id/slider_intensity"
-                app:layout_constraintTop_toBottomOf="@id/slider_intensity" />
+                app:layout_constraintEnd_toEndOf="@id/slider_temp_level"
+                app:layout_constraintTop_toBottomOf="@id/slider_temp_level" />
 
             <!-- ESPRESSO SHOTS -->
             <TextView
@@ -366,7 +366,7 @@
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_intensity_scale_none"
+                app:layout_constraintTop_toBottomOf="@id/tv_temp_level_scale_none"
                 app:layout_constraintBottom_toBottomOf="@id/shots_stepper_bg" />
 
             <com.google.android.material.card.MaterialCardView
@@ -379,7 +379,7 @@
                 app:cardBackgroundColor="#80E6E2DB"
                 app:contentPadding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_intensity_scale_none">
+                app:layout_constraintTop_toBottomOf="@id/tv_temp_level_scale_none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -436,7 +436,7 @@
                 android:layout_marginTop="10dp"
                 android:buttonTint="@color/theme_brown"
                 android:fontFamily="@font/manrope_regular"
-                android:text="Vanilla (+ 10.000d)"
+                android:text="Vanilla (+ 5.000d)"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -449,7 +449,7 @@
                 android:layout_marginTop="4dp"
                 android:buttonTint="@color/theme_brown"
                 android:fontFamily="@font/manrope_regular"
-                android:text="Hazelnut (+ 10.000d)"
+                android:text="Hazelnut (+ 5.000d)"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -462,7 +462,7 @@
                 android:layout_marginTop="4dp"
                 android:buttonTint="@color/theme_brown"
                 android:fontFamily="@font/manrope_regular"
-                android:text="Caramel (+ 10.000d)"
+                android:text="Caramel (+ 5.000d)"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -528,6 +528,7 @@
             android:paddingVertical="12dp"
             android:text="Add to Cart"
             android:textAllCaps="false"
+            android:fontFamily="@font/manrope_bold"
             android:textColor="@color/white"
             android:textSize="15sp"
             app:backgroundTint="@color/theme_brown"

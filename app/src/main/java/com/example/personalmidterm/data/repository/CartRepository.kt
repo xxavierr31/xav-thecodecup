@@ -26,7 +26,7 @@ class CartRepository(
             it.coffeeId == coffee.id &&
             it.sweetness == customization.sweetness &&
             it.temperature == customization.temperature &&
-            it.intensity == customization.intensity &&
+            it.temperatureLevel == customization.temperatureLevel &&
             it.shots == customization.shots &&
             it.flavors == customization.flavors
         }
@@ -41,7 +41,7 @@ class CartRepository(
                     coffeeImageRes = coffee.imageRes,
                     sweetness = customization.sweetness,
                     temperature = customization.temperature,
-                    intensity = customization.intensity,
+                    temperatureLevel = customization.temperatureLevel,
                     shots = customization.shots,
                     flavors = customization.flavors,
                     quantity = quantity,
@@ -60,7 +60,7 @@ class CartRepository(
                 coffeeImageRes = item.coffee.imageRes,
                 sweetness = item.customization.sweetness,
                 temperature = item.customization.temperature,
-                intensity = item.customization.intensity,
+                temperatureLevel = item.customization.temperatureLevel,
                 shots = item.customization.shots,
                 flavors = item.customization.flavors,
                 quantity = item.quantity,
@@ -74,7 +74,7 @@ class CartRepository(
                 coffeeImageRes = item.coffee.imageRes,
                 sweetness = item.customization.sweetness,
                 temperature = item.customization.temperature,
-                intensity = item.customization.intensity,
+                temperatureLevel = item.customization.temperatureLevel,
                 shots = item.customization.shots,
                 flavors = item.customization.flavors,
                 quantity = newQuantity,
@@ -91,7 +91,7 @@ class CartRepository(
             coffeeImageRes = item.coffee.imageRes,
             sweetness = item.customization.sweetness,
             temperature = item.customization.temperature,
-            intensity = item.customization.intensity,
+            temperatureLevel = item.customization.temperatureLevel,
             shots = item.customization.shots,
             flavors = item.customization.flavors,
             quantity = item.quantity,

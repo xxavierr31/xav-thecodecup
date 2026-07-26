@@ -41,6 +41,7 @@ class DetailsFragment : Fragment() {
         viewModel.loadCoffee(coffeeId)
 
         setupHeader()
+        setupFlavorLabels()
         setupListeners()
         observeViewModel()
     }
@@ -59,8 +60,14 @@ class DetailsFragment : Fragment() {
             viewModel.toggleFavorite()
         }
         binding.header.cartIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_detailsFragment_to_cartFragment)
+            CartPreviewBottomSheet().show(childFragmentManager, "CartPreview")
         }
+    }
+
+    private fun setupFlavorLabels() {
+        binding.cbVanilla.text = "${Flavor.VANILLA.label} (+ ${CurrencyFormatter.format(Flavor.VANILLA.price)})"
+        binding.cbHazelnut.text = "${Flavor.HAZELNUT.label} (+ ${CurrencyFormatter.format(Flavor.HAZELNUT.price)})"
+        binding.cbCaramel.text = "${Flavor.CARAMEL.label} (+ ${CurrencyFormatter.format(Flavor.CARAMEL.price)})"
     }
 
     private fun setupListeners() {
@@ -75,13 +82,15 @@ class DetailsFragment : Fragment() {
             viewModel.updateCustomization { it.copy(sweetness = sweetness) }
         }
 
-        binding.sliderIntensity.addOnChangeListener { _, value, _ ->
-            val intensity = when (value.toInt()) {
-                0 -> Intensity.LOW
-                50 -> Intensity.MEDIUM
-                else -> Intensity.HIGH
+        binding.sliderTempLevel.addOnChangeListener { _, value, _ ->
+            val level = when (value.toInt()) {
+                0 -> TemperatureLevel.ZERO
+                25 -> TemperatureLevel.TWENTY_FIVE
+                50 -> TemperatureLevel.FIFTY
+                75 -> TemperatureLevel.SEVENTY_FIVE
+                else -> TemperatureLevel.HUNDRED
             }
-            viewModel.updateCustomization { it.copy(intensity = intensity) }
+            viewModel.updateCustomization { it.copy(temperatureLevel = level) }
         }
 
         binding.btnTempIced.setOnClickListener {
@@ -172,22 +181,28 @@ class DetailsFragment : Fragment() {
             Sweetness.HUNDRED -> 100f
         }
 
-        binding.tvIntensityValue.text = c.intensity.label
-        binding.sliderIntensity.value = when (c.intensity) {
-            Intensity.LOW -> 0f
-            Intensity.MEDIUM -> 50f
-            Intensity.HIGH -> 100f
+        binding.tvTempLevelLabel.text = if (c.temperature == Temperature.ICED) "Ice Level" else "Heat Level"
+        binding.tvTempLevelValue.text = c.temperatureLevel.label
+        binding.sliderTempLevel.value = when (c.temperatureLevel) {
+            TemperatureLevel.ZERO -> 0f
+            TemperatureLevel.TWENTY_FIVE -> 25f
+            TemperatureLevel.FIFTY -> 50f
+            TemperatureLevel.SEVENTY_FIVE -> 75f
+            TemperatureLevel.HUNDRED -> 100f
         }
 
+        val cream = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.card_cream))
+        val grey = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+
         if (c.temperature == Temperature.ICED) {
-            binding.btnTempIced.setBackgroundColor(requireContext().getColor(R.color.card_cream))
+            binding.btnTempIced.backgroundTintList = cream
             binding.btnTempIced.setTextColor(requireContext().getColor(R.color.theme_brown))
-            binding.btnTempHot.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            binding.btnTempHot.backgroundTintList = grey
             binding.btnTempHot.setTextColor(requireContext().getColor(R.color.text_secondary))
         } else {
-            binding.btnTempHot.setBackgroundColor(requireContext().getColor(R.color.card_cream))
+            binding.btnTempHot.backgroundTintList = cream
             binding.btnTempHot.setTextColor(requireContext().getColor(R.color.theme_brown))
-            binding.btnTempIced.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            binding.btnTempIced.backgroundTintList = grey
             binding.btnTempIced.setTextColor(requireContext().getColor(R.color.text_secondary))
         }
 

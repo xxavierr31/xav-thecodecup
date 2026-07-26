@@ -26,7 +26,8 @@ object ViewModelFactory {
                     HomeViewModel(
                         container.coffeeRepository,
                         container.favoriteRepository,
-                        container.loyaltyPrefs
+                        container.loyaltyPrefs,
+                        container.profileRepository
                     ) as T
                 }
                 modelClass.isAssignableFrom(MenuViewModel::class.java) -> {

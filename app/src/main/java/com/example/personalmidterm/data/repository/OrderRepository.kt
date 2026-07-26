@@ -38,7 +38,7 @@ class OrderRepository(
                 coffeeImageRes = item.coffee.imageRes,
                 sweetness = item.customization.sweetness,
                 temperature = item.customization.temperature,
-                intensity = item.customization.intensity,
+                temperatureLevel = item.customization.temperatureLevel,
                 shots = item.customization.shots,
                 flavors = item.customization.flavors,
                 quantity = item.quantity,

@@ -98,6 +98,27 @@ class CartFragment : Fragment() {
                         binding.tvEstimatedTotalVal.text = CurrencyFormatter.format(total)
                     }
                 }
+                launch {
+                    viewModel.discountUiState.collect { state ->
+                        if (state.isVisible) {
+                            binding.tvRankPerk.visibility = View.VISIBLE
+                            binding.tvRankPerkVal.visibility = View.VISIBLE
+                            binding.tvOldTotalVal.visibility = View.VISIBLE
+                            binding.divider.visibility = View.VISIBLE
+                            
+                            binding.tvRankPerk.text = "${state.rankName} (${state.discountPercent}% off)"
+                            binding.tvRankPerkVal.text = "-${CurrencyFormatter.format(state.discountAmount)}"
+                            
+                            binding.tvOldTotalVal.text = CurrencyFormatter.format(state.subtotal)
+                            binding.tvOldTotalVal.paintFlags = binding.tvOldTotalVal.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+                        } else {
+                            binding.tvRankPerk.visibility = View.GONE
+                            binding.tvRankPerkVal.visibility = View.GONE
+                            binding.tvOldTotalVal.visibility = View.GONE
+                            binding.divider.visibility = View.GONE
+                        }
+                    }
+                }
             }
         }
     }

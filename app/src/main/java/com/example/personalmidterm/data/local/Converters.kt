@@ -23,10 +23,10 @@ class Converters {
     fun toTemperature(name: String): Temperature = Temperature.valueOf(name)
 
     @TypeConverter
-    fun fromIntensity(intensity: Intensity): String = intensity.name
+    fun fromTemperatureLevel(level: TemperatureLevel): String = level.name
 
     @TypeConverter
-    fun toIntensity(name: String): Intensity = Intensity.valueOf(name)
+    fun toTemperatureLevel(name: String): TemperatureLevel = TemperatureLevel.valueOf(name)
 
     @TypeConverter
     fun fromFlavorList(flavors: List<Flavor>): String = flavors.joinToString(",") { it.name }
