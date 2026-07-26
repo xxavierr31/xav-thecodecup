@@ -8,16 +8,27 @@
     android:layout_marginTop="24dp"
     android:layout_marginBottom="24dp">
 
+<ImageView
+    android:id="@+id/iv_loyalty_logo"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:src="@drawable/ic_logo"
+    app:tint="@color/theme_brown"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/your_reward_header"
+    app:layout_constraintBottom_toBottomOf="@id/your_reward_header" />
+
 <TextView
     android:id="@+id/your_reward_header"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
     android:fontFamily="@font/playfairdisplay_bold"
     android:text="Your Stamps"
     android:textColor="@color/black"
     android:textSize="24sp"
     android:textStyle="bold"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintStart_toEndOf="@id/iv_loyalty_logo"
     app:layout_constraintTop_toTopOf="parent" />
 <TextView
     android:id="@+id/tv_stamps_count"
@@ -26,7 +37,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     android:text="0/8 Stamps"
-    android:textSize="14sp"
+    android:textSize="18sp"
     android:textColor="@color/theme_maroon"
     android:fontFamily="@font/manrope_bold"
     app:layout_constraintBottom_toTopOf="@+id/loyalty_vine"/>
@@ -38,6 +49,7 @@
     android:layout_marginTop="16dp"
     android:padding="24dp"
     android:scrollbars="none"
+    android:fillViewport="true"
     android:background="@drawable/loyalty_bg"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -45,18 +57,20 @@
 
     <LinearLayout
         android:id="@+id/stamps_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="8">
         <!-- 8 Stamp slots -->
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
-        <include layout="@layout/item_stamp_slot" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
+        <include layout="@layout/item_stamp_slot" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
     </LinearLayout>
 </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

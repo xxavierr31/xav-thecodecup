@@ -8,7 +8,6 @@ import com.example.personalmidterm.model.Coffee
 import com.example.personalmidterm.util.CurrencyFormatter
 
 class CoffeeAdapter(
-    private val onCoffeeClick: (Coffee) -> Unit,
     private val onAddClick: (Coffee) -> Unit
 ) : RecyclerView.Adapter<CoffeeAdapter.CoffeeViewHolder>() {
 
@@ -43,7 +42,6 @@ class CoffeeAdapter(
             binding.tvProductPrice.text = CurrencyFormatter.format(coffee.basePrice)
             binding.ivProductImage.setImageResource(coffee.imageRes)
 
-            binding.root.setOnClickListener { onCoffeeClick(coffee) }
             binding.btnAddProduct.setOnClickListener { onAddClick(coffee) }
         }
     }

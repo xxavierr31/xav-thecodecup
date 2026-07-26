@@ -46,7 +46,7 @@ class OrderAdapter(
             binding.tvOrderDate.text = dateFormat.format(Date(order.timestamp))
             binding.tvOrderPrice.text = CurrencyFormatter.format(order.totalPrice)
             
-            val itemsSummary = order.items.joinToString(", ") { it.coffeeName }
+            val itemsSummary = order.items.joinToString(", ") { "${it.quantity}x ${it.coffeeName}" }
             binding.tvOrderItems.text = itemsSummary
             
             val isOngoing = order.status == OrderStatus.ONGOING

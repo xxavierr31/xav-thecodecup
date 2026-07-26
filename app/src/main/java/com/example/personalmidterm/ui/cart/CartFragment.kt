@@ -66,6 +66,14 @@ class CartFragment : Fragment() {
             override fun onSwiped(vh: RecyclerView.ViewHolder, direction: Int) {
                 val item = adapter.getItemAt(vh.adapterPosition)
                 viewModel.removeItem(item)
+                
+                com.google.android.material.snackbar.Snackbar.make(
+                    binding.root,
+                    "Item removed from cart",
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                ).setAction("UNDO") {
+                    viewModel.undoDelete()
+                }.show()
             }
         }
         ItemTouchHelper(swipeHandler).attachToRecyclerView(binding.rvCartItems)
@@ -76,6 +84,9 @@ class CartFragment : Fragment() {
             viewModel.checkout { orderId ->
                 findNavController().navigate(R.id.action_cartFragment_to_orderSuccessFragment)
             }
+        }
+        binding.btnShopping.setOnClickListener {
+            findNavController().navigate(R.id.menuFragment)
         }
         binding.emptyState.findViewById<View>(R.id.btn_browse_menu).setOnClickListener {
             findNavController().navigate(R.id.menuFragment)

@@ -3,6 +3,12 @@ package com.example.personalmidterm
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -17,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        createNotificationChannel()
+
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -28,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             
             // Hide navbar for certain screens
             val stackOnlyDestinations = setOf(
+                R.id.loadingScreenFragment,
                 R.id.detailsFragment,
                 R.id.cartFragment,
                 R.id.orderSuccessFragment,
@@ -80,6 +89,39 @@ class MainActivity : AppCompatActivity() {
 
             nav5Label.setTextColor(if (destinationId == R.id.myOrdersFragment) brown else grey)
             nav5.imageTintList = if (destinationId == R.id.myOrdersFragment) brownList else greyList
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Rewards"
+            val descriptionText = "Notifications for rank ups and rewards"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("REWARDS_CHANNEL", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    fun showRankUpNotification(newRank: String) {
+        val builder = NotificationCompat.Builder(this, "REWARDS_CHANNEL")
+            .setSmallIcon(R.drawable.ic_leaf)
+            .setContentTitle("New Rank Unlocked!")
+            .setContentText("Congratulations! You've reached the $newRank rank!")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
+        try {
+            with(NotificationManagerCompat.from(this)) {
+                if (androidx.core.content.ContextCompat.checkSelfPermission(this@MainActivity, android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    notify(1001, builder.build())
+                }
+            }
+        } catch (e: SecurityException) {
+            // Permission not granted
         }
     }
 }

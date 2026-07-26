@@ -16,6 +16,7 @@ import com.example.personalmidterm.R
 import com.example.personalmidterm.databinding.FragmentMenuBinding
 import com.example.personalmidterm.model.Category
 import com.example.personalmidterm.ui.ViewModelFactory
+import androidx.core.widget.doOnTextChanged
 import kotlinx.coroutines.launch
 
 class MenuFragment : Fragment() {
@@ -39,9 +40,16 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         
         setupHeader()
+        setupSearch()
         setupRecyclerView()
         setupFilters()
         observeViewModel()
+    }
+
+    private fun setupSearch() {
+        binding.etMenuSearch.doOnTextChanged { text, _, _, _ ->
+            viewModel.updateSearchQuery(text?.toString() ?: "")
+        }
     }
 
     private fun setupHeader() {
@@ -54,10 +62,6 @@ class MenuFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = CoffeeAdapter(
-            onCoffeeClick = { coffee ->
-                val bundle = bundleOf("coffeeId" to coffee.id)
-                findNavController().navigate(R.id.action_menuFragment_to_detailsFragment, bundle)
-            },
             onAddClick = { coffee ->
                 val bundle = bundleOf("coffeeId" to coffee.id)
                 findNavController().navigate(R.id.action_menuFragment_to_detailsFragment, bundle)

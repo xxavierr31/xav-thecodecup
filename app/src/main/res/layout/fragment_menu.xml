@@ -54,6 +54,54 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_menu_title" />
 
+            <!-- SEARCH BAR -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/search_bar_card"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="26dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/card_cream"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider_light"
+                app:layout_constraintTop_toBottomOf="@id/tv_menu_subtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="16dp">
+
+                    <ImageView
+                        android:id="@+id/iv_search_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        app:tint="@color/theme_brown"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_menu_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="12dp"
+                        android:background="@null"
+                        android:hint="Search for a drink"
+                        android:inputType="text"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/manrope_medium"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="@color/text_secondary"
+                        app:layout_constraintStart_toEndOf="@id/iv_search_icon"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- FILTER TABS -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_tab_seasonal"
@@ -74,7 +122,7 @@
                 app:backgroundTint="@color/theme_brown"
                 app:cornerRadius="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_menu_subtitle" />
+                app:layout_constraintTop_toBottomOf="@id/search_bar_card" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_tab_classics"

@@ -20,4 +20,6 @@
     <color name="status_cancelled_bg">#E8E3DC</color>
     <color name="status_cancelled_text">#8C8478</color>
 
+    <color name="disallowed_redeem_bg">#C4C4C4</color>
+    <color name="disallowed_redeem_pts">#BA1A1A</color>
 </resources>

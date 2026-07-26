@@ -46,8 +46,34 @@
                     android:id="@+id/iv_profile_photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    tools:src="@drawable/profile" />
+                    android:scaleType="fitCenter"
+                    android:padding="40dp"
+                    android:tint="@color/bg_grey"
+                    android:src="@drawable/profile" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- PHOTO EDIT OVERLAY -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_change_photo"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/theme_brown"
+                app:strokeColor="#E6E2DB"
+                app:strokeWidth="2dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/profile_photo_bg"
+                app:layout_constraintBottom_toBottomOf="@id/profile_photo_bg"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus"
+                    app:tint="@color/white" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -88,12 +114,11 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_photo_bg"
                 tools:visibility="visible" />
 
-            <!-- TAG BADGE -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/tag_badge_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="80dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="#ECE7E1"
@@ -101,7 +126,7 @@
                 app:strokeWidth="1dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_profile_name">
+                app:layout_constraintTop_toBottomOf="@id/profile_photo_bg">
 
                 <LinearLayout
                     android:layout_width="wrap_content"

@@ -35,14 +35,15 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/hero_card"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     app:cardCornerRadius="32dp"
                     app:layout_constraintHeight_max="378dp"
+                    app:layout_constraintWidth_max="450dp"
                     app:cardElevation="0dp"
-                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -86,7 +87,7 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="100dp"
                             android:fontFamily="@font/playfairdisplay_bold"
-                            android:text="Spring\nMatcha\nBliss"
+                            android:text="Spring Matcha Bliss"
                             android:textColor="@color/theme_green_badge"
                             android:textSize="32sp"
                             android:textStyle="bold"
@@ -103,10 +104,14 @@
                             android:text="Ceremonial grade matcha blended with oat milk and a hint of pressed cherry blossom syrup."
                             android:textColor="@color/theme_muted"
                             android:textSize="14sp"
+                            android:lineHeight="20dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/hero_title"
-                            app:layout_constraintBottom_toTopOf="@id/hero_button" />
+                            app:layout_constraintBottom_toTopOf="@id/hero_button"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintVertical_bias="0.0"
+                            android:layout_marginBottom="8dp"/>
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/hero_button"
@@ -124,7 +129,8 @@
                             app:backgroundTint="@color/theme_brown"
                             app:cornerRadius="24dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hero_description" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,15 +141,30 @@
                 android:id="@+id/loyalty_card"
                 layout="@layout/layout_loyalty" />
 
-            <!-- Saved Recipes -->
-            <TextView
+            <!-- Saved Recipes Title -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saved Recipes"
-                android:textSize="24sp"
-                android:fontFamily="@font/playfairdisplay_bold"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_saved_recipes_heart"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_full_heart"
+                    app:tint="@color/theme_brown"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Saved Recipes"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/playfairdisplay_bold"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/saved_recipes_recycler"
@@ -151,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/layout_recipe"
+                tools:listitem="@layout/item_recipe"
                 tools:itemCount="4"
                 app:spanCount="2" />
 

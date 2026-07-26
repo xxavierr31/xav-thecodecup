@@ -23,9 +23,9 @@ class ProfileViewModel(
 
     val loyaltyState = loyaltyPrefs.loyaltyState
 
-    fun updateProfile(name: String, email: String, phone: String, address: String) {
+    fun updateProfile(name: String, email: String, phone: String, address: String, imagePath: String? = null) {
         viewModelScope.launch {
-            profileRepository.saveProfile(Profile(name, email, phone, address))
+            profileRepository.saveProfile(Profile(name, email, phone, address, imagePath))
         }
     }
 }

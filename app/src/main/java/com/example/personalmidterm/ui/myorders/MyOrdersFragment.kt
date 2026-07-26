@@ -80,6 +80,16 @@ class MyOrdersFragment : Fragment() {
                         updateTabUi(status)
                     }
                 }
+                launch {
+                    viewModel.orderCompletionEvent.collect { result ->
+                        if (result.stamps == 0 && result.rankUpOccurred) {
+                            android.widget.Toast.makeText(requireContext(), "8 Stamps collected! Your vine has fully regrown its leaves!", android.widget.Toast.LENGTH_LONG).show()
+                            (activity as? com.example.personalmidterm.MainActivity)?.showRankUpNotification(result.newRankName)
+                        } else if (result.stamps > 0) {
+                            android.widget.Toast.makeText(requireContext(), "Stamp collected! ${result.stamps}/8", android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
         }
     }

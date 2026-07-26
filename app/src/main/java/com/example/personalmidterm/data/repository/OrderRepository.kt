@@ -50,8 +50,8 @@ class OrderRepository(
         return orderDao.placeOrder(orderEntity, orderItemEntities)
     }
 
-    suspend fun completeOrder(orderId: Long) {
-        val order = orderDao.getOrderById(orderId) ?: return
+    suspend fun completeOrder(orderId: Long): OrderCompletionResult? {
+        val order = orderDao.getOrderById(orderId) ?: return null
         if (order.status == OrderStatus.ONGOING) {
             orderDao.updateOrder(order.copy(status = OrderStatus.HISTORY))
             
@@ -59,9 +59,14 @@ class OrderRepository(
             val loyaltyState = loyaltyPrefs.loyaltyState.first()
             var stamps = loyaltyState.stamps + 1
             var rankIndex = loyaltyState.rankIndex
+            var rankUpOccurred = false
             
             if (stamps == 8) {
-                rankIndex = (rankIndex + 1).coerceAtMost(rankTiers.lastIndex)
+                val newRankIndex = (rankIndex + 1).coerceAtMost(rankTiers.lastIndex)
+                if (newRankIndex > rankIndex) {
+                    rankUpOccurred = true
+                }
+                rankIndex = newRankIndex
                 stamps = 0
             }
             
@@ -80,6 +85,21 @@ class OrderRepository(
                     timestamp = System.currentTimeMillis()
                 )
             )
+
+            return OrderCompletionResult(
+                stamps = stamps,
+                pointsEarned = pointsEarned,
+                rankUpOccurred = rankUpOccurred,
+                newRankName = rankTiers[rankIndex].rank
+            )
         }
+        return null
     }
 }
+
+data class OrderCompletionResult(
+    val stamps: Int,
+    val pointsEarned: Int,
+    val rankUpOccurred: Boolean,
+    val newRankName: String
+)

@@ -22,13 +22,19 @@ class MyOrdersViewModel(
         orders.filter { it.status == status }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    private val _orderCompletionEvent = MutableSharedFlow<com.example.personalmidterm.data.repository.OrderCompletionResult>()
+    val orderCompletionEvent = _orderCompletionEvent.asSharedFlow()
+
     fun setStatus(status: OrderStatus) {
         _selectedStatus.value = status
     }
 
     fun completeOrder(orderId: Long) {
         viewModelScope.launch {
-            orderRepository.completeOrder(orderId)
+            val result = orderRepository.completeOrder(orderId)
+            result?.let {
+                _orderCompletionEvent.emit(it)
+            }
         }
     }
 }

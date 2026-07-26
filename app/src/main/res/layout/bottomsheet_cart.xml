@@ -37,81 +37,101 @@
         android:backgroundTint="@android:color/transparent"
         app:tint="@color/theme_brown"/>
 
-    <!-- CART CONTENT GROUP — visible when cart has items -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_cart_preview"
-        android:layout_width="match_parent"
+    <!-- SCROLLABLE CART CONTENT — caps sheet height, scrolls list+total+button together -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/cart_content_scroll"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:maxHeight="280dp"
-        android:nestedScrollingEnabled="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:maxHeight="440dp"
+        android:overScrollMode="never"
         app:layout_constraintTop_toBottomOf="@id/tv_sheet_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_cart"
-        tools:itemCount="2" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <View
-        android:id="@+id/sheet_divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/divider_light"
-        app:layout_constraintTop_toBottomOf="@id/rv_cart_preview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_sheet_total_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/manrope_regular"
-        android:text="Estimated Total"
-        android:textColor="@color/text_secondary"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sheet_divider"
-        app:layout_constraintBottom_toBottomOf="@id/tv_sheet_total_val" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cart_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/item_cart"
+                tools:itemCount="2" />
 
-    <TextView
-        android:id="@+id/tv_sheet_total_val"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/playfairdisplay_bold"
-        android:text="80.000d"
-        android:textColor="@color/theme_brown"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sheet_divider" />
+            <View
+                android:id="@+id/sheet_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/divider_light"
+                app:layout_constraintTop_toBottomOf="@id/rv_cart_preview"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_go_to_cart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:paddingVertical="14dp"
-        android:text="Go to Cart"
-        android:fontFamily="@font/manrope_bold"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:backgroundTint="@color/theme_brown"
-        app:cornerRadius="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_sheet_total_val" />
+            <TextView
+                android:id="@+id/tv_sheet_total_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/manrope_regular"
+                android:text="Estimated Total"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sheet_divider"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sheet_total_val" />
+
+            <TextView
+                android:id="@+id/tv_sheet_total_val"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/playfairdisplay_bold"
+                android:text="80.000d"
+                android:textColor="@color/theme_brown"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sheet_divider" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_go_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingVertical="14dp"
+                android:text="Go to Cart"
+                android:fontFamily="@font/manrope_bold"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:backgroundTint="@color/theme_brown"
+                app:cornerRadius="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sheet_total_val"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/cart_content_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="rv_cart_preview,sheet_divider,tv_sheet_total_label,tv_sheet_total_val,btn_go_to_cart" />
+        app:constraint_referenced_ids="cart_content_scroll" />
 
     <!-- EMPTY STATE — hidden by default, toggle visibility when cart is empty -->
     <androidx.constraintlayout.widget.ConstraintLayout

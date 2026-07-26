@@ -39,6 +39,19 @@ class FavoriteRepository(
         toDelete.forEach { favoriteDao.deleteFavorite(it) }
     }
 
+    suspend fun removeFavoriteExact(coffeeId: Long, customization: Customization) {
+        val favorites = favoriteDao.getAllFavorites().first()
+        val toDelete = favorites.find {
+            it.coffeeId == coffeeId &&
+            it.sweetness == customization.sweetness &&
+            it.temperature == customization.temperature &&
+            it.temperatureLevel == customization.temperatureLevel &&
+            it.shots == customization.shots &&
+            it.flavors == customization.flavors
+        }
+        toDelete?.let { favoriteDao.deleteFavorite(it) }
+    }
+
     suspend fun removeFavorite(favoriteId: Long) {
         val favorites = favoriteDao.getAllFavorites().first()
         val toDelete = favorites.find { it.id == favoriteId }

@@ -18,11 +18,18 @@ class MenuViewModel(
     private val _selectedCategory = MutableStateFlow(Category.SPECIAL)
     val selectedCategory: StateFlow<Category> = _selectedCategory.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
     val filteredCoffees: StateFlow<List<Coffee>> = combine(
         coffeeRepository.allCoffees,
-        _selectedCategory
-    ) { coffees, category ->
-        coffees.filter { it.category == category }
+        _selectedCategory,
+        _searchQuery
+    ) { coffees, category, query ->
+        coffees.filter { 
+            it.category == category && 
+            (query.isBlank() || it.name.contains(query, ignoreCase = true))
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -31,6 +38,10 @@ class MenuViewModel(
 
     fun setCategory(category: Category) {
         _selectedCategory.value = category
+    }
+
+    fun updateSearchQuery(query: String) {
+        _searchQuery.value = query
     }
 
     fun quickAddToCart(coffee: Coffee) {

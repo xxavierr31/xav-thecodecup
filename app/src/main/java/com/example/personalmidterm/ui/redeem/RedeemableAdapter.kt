@@ -3,6 +3,7 @@ package com.example.personalmidterm.ui.redeem
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.personalmidterm.R
 import com.example.personalmidterm.databinding.ItemMarketplaceBinding
 import com.example.personalmidterm.model.RedeemableItem
 
@@ -43,7 +44,20 @@ class RedeemableAdapter(
             binding.tvItemPoints.text = "${item.pointsCost} pts"
             binding.ivItemImage.setImageResource(item.imageRes)
             
-            binding.btnRedeem.isEnabled = currentPoints >= item.pointsCost
+            val isRedeemable = currentPoints >= item.pointsCost
+            binding.btnRedeem.isEnabled = isRedeemable
+            
+            val context = binding.root.context
+            if (isRedeemable) {
+                binding.btnRedeem.backgroundTintList = android.content.res.ColorStateList.valueOf(context.getColor(R.color.theme_brown))
+                binding.btnRedeem.setTextColor(context.getColor(R.color.white))
+                binding.tvItemPoints.setTextColor(context.getColor(R.color.theme_brown))
+            } else {
+                binding.btnRedeem.backgroundTintList = android.content.res.ColorStateList.valueOf(context.getColor(R.color.disallowed_redeem_bg))
+                binding.btnRedeem.setTextColor(context.getColor(R.color.bg_grey))
+                binding.tvItemPoints.setTextColor(context.getColor(R.color.disallowed_redeem_pts))
+            }
+
             binding.btnRedeem.setOnClickListener { onRedeemClick(item) }
         }
     }

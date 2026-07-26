@@ -16,6 +16,8 @@ import com.example.personalmidterm.R
 import com.example.personalmidterm.databinding.FragmentHomeBinding
 import com.example.personalmidterm.model.Coffee
 import com.example.personalmidterm.ui.ViewModelFactory
+import android.net.Uri
+import java.io.File
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -89,10 +91,34 @@ class HomeFragment : Fragment() {
                 }
                 launch {
                     viewModel.profile.collect { profile ->
-                        binding.header.greetingText.text = "Good Morning, ${profile.name}"
+                        val greeting = getGreeting()
+                        binding.header.greetingText.text = "$greeting, ${profile.name}"
+                        
+                        if (profile.imagePath != null) {
+                            val file = File(profile.imagePath)
+                            if (file.exists()) {
+                                binding.header.userAvatar.setPadding(0, 0, 0, 0)
+                                binding.header.userAvatar.setImageURI(Uri.fromFile(file))
+                            } else {
+                                binding.header.userAvatar.setPadding(8, 8, 8, 8)
+                                binding.header.userAvatar.setImageResource(R.drawable.profile)
+                            }
+                        } else {
+                            binding.header.userAvatar.setPadding(8, 8, 8, 8)
+                            binding.header.userAvatar.setImageResource(R.drawable.profile)
+                        }
                     }
                 }
             }
+        }
+    }
+
+    private fun getGreeting(): String {
+        val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+        return when (hour) {
+            in 5..11 -> "Good Morning"
+            in 12..17 -> "Good Afternoon"
+            else -> "Good Evening"
         }
     }
 

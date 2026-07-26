@@ -68,6 +68,8 @@ class CartViewModel(
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DiscountUiState())
 
+    private var lastDeletedItem: CartItem? = null
+
     fun updateQuantity(item: CartItem, delta: Int) {
         viewModelScope.launch {
             cartRepository.updateQuantity(item, item.quantity + delta)
@@ -75,8 +77,22 @@ class CartViewModel(
     }
 
     fun removeItem(item: CartItem) {
+        lastDeletedItem = item
         viewModelScope.launch {
             cartRepository.removeItem(item)
+        }
+    }
+
+    fun undoDelete() {
+        val item = lastDeletedItem ?: return
+        viewModelScope.launch {
+            cartRepository.addItem(
+                coffee = item.coffee,
+                customization = item.customization,
+                quantity = item.quantity,
+                unitPrice = item.unitPrice
+            )
+            lastDeletedItem = null
         }
     }
 

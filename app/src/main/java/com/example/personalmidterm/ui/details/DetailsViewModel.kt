@@ -23,8 +23,21 @@ class DetailsViewModel(
     private val _customization = MutableStateFlow(Customization())
     val customization: StateFlow<Customization> = _customization.asStateFlow()
 
-    private val _isFavorite = MutableStateFlow(false)
-    val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
+    val isFavorite: StateFlow<Boolean> = combine(
+        _coffee,
+        _customization,
+        favoriteRepository.allFavorites
+    ) { coffee, customization, favorites ->
+        if (coffee == null) false
+        else favorites.any {
+            it.coffee.id == coffee.id &&
+            it.customization.sweetness == customization.sweetness &&
+            it.customization.temperature == customization.temperature &&
+            it.customization.temperatureLevel == customization.temperatureLevel &&
+            it.customization.shots == customization.shots &&
+            it.customization.flavors == customization.flavors
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     val totalPrice: StateFlow<Long> = combine(_coffee, _customization) { coffee, customization ->
         if (coffee == null) 0L
@@ -35,15 +48,13 @@ class DetailsViewModel(
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
 
-    fun loadCoffee(id: Long) {
+    fun loadCoffee(id: Long, initialCustomization: Customization? = null) {
         viewModelScope.launch {
             val coffee = coffeeRepository.getCoffeeById(id)
             _coffee.value = coffee
             
-            if (coffee != null) {
-                favoriteRepository.allFavorites.collect { favorites ->
-                    _isFavorite.value = favorites.any { it.coffee.id == id }
-                }
+            if (initialCustomization != null) {
+                _customization.value = initialCustomization
             }
         }
     }
@@ -54,13 +65,13 @@ class DetailsViewModel(
 
     fun toggleFavorite() {
         val coffee = _coffee.value ?: return
+        val currentCust = _customization.value
         viewModelScope.launch {
-            if (_isFavorite.value) {
-                favoriteRepository.removeFavoriteByCoffeeId(coffee.id)
+            if (isFavorite.value) {
+                favoriteRepository.removeFavoriteExact(coffee.id, currentCust)
             } else {
-                favoriteRepository.addFavorite(coffee, _customization.value)
+                favoriteRepository.addFavorite(coffee, currentCust)
             }
-            _isFavorite.value = !_isFavorite.value
         }
     }
 

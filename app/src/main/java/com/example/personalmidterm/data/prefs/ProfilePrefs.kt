@@ -17,7 +17,8 @@ class ProfilePrefs(context: Context) {
             name = prefs.getString("name", "Xavier") ?: "Xavier",
             email = prefs.getString("email", "xavier@example.com") ?: "xavier@example.com",
             phone = prefs.getString("phone", "+1234567890") ?: "+1234567890",
-            address = prefs.getString("address", "123 Coffee St, Bean City") ?: "123 Coffee St, Bean City"
+            address = prefs.getString("address", "123 Coffee St, Bean City") ?: "123 Coffee St, Bean City",
+            imagePath = prefs.getString("image_path", null)
         )
     }
 
@@ -27,6 +28,7 @@ class ProfilePrefs(context: Context) {
             putString("email", profile.email)
             putString("phone", profile.phone)
             putString("address", profile.address)
+            putString("image_path", profile.imagePath)
             apply()
         }
         _profile.value = profile
