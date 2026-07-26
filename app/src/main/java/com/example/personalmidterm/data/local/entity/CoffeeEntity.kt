@@ -12,7 +12,9 @@ data class CoffeeEntity(
     val description: String,
     val basePrice: Long,
     val imageRes: Int,
-    val category: Category
+    val category: Category,
+    val canBeHot: Boolean = true,
+    val canBeIced: Boolean = true
 ) {
     fun toDomainModel() = Coffee(
         id = id,
@@ -20,6 +22,8 @@ data class CoffeeEntity(
         description = description,
         basePrice = basePrice,
         imageRes = imageRes,
-        category = category
+        category = category,
+        canBeHot = canBeHot,
+        canBeIced = canBeIced
     )
 }

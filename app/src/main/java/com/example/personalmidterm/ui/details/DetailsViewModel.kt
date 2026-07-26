@@ -8,6 +8,7 @@ import com.example.personalmidterm.data.repository.FavoriteRepository
 import com.example.personalmidterm.model.Coffee
 import com.example.personalmidterm.model.Customization
 import com.example.personalmidterm.model.Flavor
+import com.example.personalmidterm.model.Temperature
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -55,6 +56,13 @@ class DetailsViewModel(
             
             if (initialCustomization != null) {
                 _customization.value = initialCustomization
+            } else if (coffee != null) {
+                // Enforce valid default temperature
+                if (!coffee.canBeIced && _customization.value.temperature == Temperature.ICED) {
+                    _customization.value = _customization.value.copy(temperature = Temperature.HOT)
+                } else if (!coffee.canBeHot && _customization.value.temperature == Temperature.HOT) {
+                    _customization.value = _customization.value.copy(temperature = Temperature.ICED)
+                }
             }
         }
     }

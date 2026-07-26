@@ -37,13 +37,11 @@
         android:backgroundTint="@android:color/transparent"
         app:tint="@color/theme_brown"/>
 
-    <!-- SCROLLABLE CART CONTENT — caps sheet height, scrolls list+total+button together -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/cart_content_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:maxHeight="440dp"
         android:overScrollMode="never"
         app:layout_constraintTop_toBottomOf="@id/tv_sheet_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +64,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/item_cart"
-                tools:itemCount="2" />
+                tools:itemCount="4" />
 
             <View
                 android:id="@+id/sheet_divider"

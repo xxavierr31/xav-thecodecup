@@ -67,7 +67,8 @@ class MenuFragment : Fragment() {
                 findNavController().navigate(R.id.action_menuFragment_to_detailsFragment, bundle)
             }
         )
-        binding.rvMenuProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+        val spanCount = resources.getInteger(R.integer.menu_grid_span)
+        binding.rvMenuProducts.layoutManager = GridLayoutManager(requireContext(), spanCount)
         binding.rvMenuProducts.adapter = adapter
     }
 

@@ -9,7 +9,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.navigation.findNavController
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.personalmidterm.databinding.ActivityMainBinding
@@ -18,12 +19,21 @@ class MainActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityMainBinding
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            android.widget.Toast.makeText(this, "Notifications enabled for rewards!", android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         createNotificationChannel()
+        requestNotificationPermission()
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -96,13 +106,22 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Rewards"
             val descriptionText = "Notifications for rank ups and rewards"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel("REWARDS_CHANNEL", name, importance).apply {
                 description = descriptionText
             }
             val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != 
+                android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
 
@@ -111,7 +130,8 @@ class MainActivity : AppCompatActivity() {
             .setSmallIcon(R.drawable.ic_leaf)
             .setContentTitle("New Rank Unlocked!")
             .setContentText("Congratulations! You've reached the $newRank rank!")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setAutoCancel(true)
 
         try {
@@ -120,7 +140,7 @@ class MainActivity : AppCompatActivity() {
                     notify(1001, builder.build())
                 }
             }
-        } catch (e: SecurityException) {
+        } catch (_: SecurityException) {
             // Permission not granted
         }
     }

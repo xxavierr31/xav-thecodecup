@@ -95,13 +95,19 @@ class RewardsFragment : Fragment() {
         val stampsContainer = binding.loyaltyVine.stampsContainer
         binding.loyaltyVine.tvStampsCount.text = "$stamps/8 Stamps"
         
+        val density = resources.displayMetrics.density
+        val leafPadding = (12 * density).toInt()
+        val emptyPadding = 0
+
         for (i in 0 until stampsContainer.childCount) {
             val slot = stampsContainer.getChildAt(i)
             val icon = slot.findViewById<android.widget.ImageView>(R.id.stamp_icon)
             if (i < stamps) {
+                icon?.setPadding(leafPadding, leafPadding, leafPadding, leafPadding)
                 icon?.setImageResource(R.drawable.ic_leaf)
                 icon?.alpha = 1.0f
             } else {
+                icon?.setPadding(emptyPadding, emptyPadding, emptyPadding, emptyPadding)
                 icon?.setImageResource(R.drawable.empty_stamp)
                 icon?.alpha = 0.5f
             }

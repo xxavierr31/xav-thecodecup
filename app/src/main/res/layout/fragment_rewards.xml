@@ -140,7 +140,7 @@
                 android:id="@+id/tv_view_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="12dp"
                 android:fontFamily="@font/manrope_medium"
                 android:text="View More"
                 android:textColor="@color/theme_brown"

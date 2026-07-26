@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:minWidth="80dp">
+    android:layout_height="match_parent"
+    android:minWidth="72dp">
 
     <ImageView
         android:id="@+id/stamp_icon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/empty_stamp"
-        android:padding="12dp"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/empty_stamp" />
 </FrameLayout>

@@ -10,5 +10,7 @@ data class Coffee(
     val description: String,
     val basePrice: Long,
     val imageRes: Int,
-    val category: Category
+    val category: Category,
+    val canBeHot: Boolean = true,
+    val canBeIced: Boolean = true
 )

@@ -101,10 +101,20 @@ class DetailsFragment : Fragment() {
         }
 
         binding.btnTempIced.setOnClickListener {
-            viewModel.updateCustomization { it.copy(temperature = Temperature.ICED) }
+            val coffee = viewModel.coffee.value
+            if (coffee?.canBeIced == true) {
+                viewModel.updateCustomization { it.copy(temperature = Temperature.ICED) }
+            } else {
+                android.widget.Toast.makeText(requireContext(), "This drink is only served hot.", android.widget.Toast.LENGTH_SHORT).show()
+            }
         }
         binding.btnTempHot.setOnClickListener {
-            viewModel.updateCustomization { it.copy(temperature = Temperature.HOT) }
+            val coffee = viewModel.coffee.value
+            if (coffee?.canBeHot == true) {
+                viewModel.updateCustomization { it.copy(temperature = Temperature.HOT) }
+            } else {
+                android.widget.Toast.makeText(requireContext(), "This drink is only served cold.", android.widget.Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.btnShotsMinus.setOnClickListener {
@@ -147,7 +157,10 @@ class DetailsFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.coffee.collect { coffee ->
-                        coffee?.let { bindCoffee(it) }
+                        coffee?.let { 
+                            bindCoffee(it)
+                            updateTemperatureButtonAvailability(it)
+                        }
                     }
                 }
                 launch {
@@ -176,6 +189,13 @@ class DetailsFragment : Fragment() {
         binding.tvProductTitle.text = coffee.name
         binding.tvProductSubtitle.text = coffee.description
         binding.ivProductImage.setImageResource(coffee.imageRes)
+    }
+
+    private fun updateTemperatureButtonAvailability(coffee: Coffee) {
+        binding.btnTempIced.alpha = if (coffee.canBeIced) 1.0f else 0.4f
+        binding.btnTempHot.alpha = if (coffee.canBeHot) 1.0f else 0.4f
+        
+        // We don't disable them so they can still trigger the Toast click listener
     }
 
     private fun bindCustomization(c: Customization) {

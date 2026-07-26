@@ -147,14 +147,17 @@ class ProfileFragment : Fragment() {
                             val file = File(profile.imagePath)
                             if (file.exists()) {
                                 binding.ivProfilePhoto.setPadding(0, 0, 0, 0)
+                                binding.ivProfilePhoto.imageTintList = null
                                 binding.ivProfilePhoto.setImageURI(Uri.fromFile(file))
                             } else {
                                 // Fallback if file was deleted
                                 binding.ivProfilePhoto.setPadding(28, 28, 28, 28)
+                                binding.ivProfilePhoto.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
                                 binding.ivProfilePhoto.setImageResource(R.drawable.profile)
                             }
                         } else {
                             binding.ivProfilePhoto.setPadding(28, 28, 28, 28)
+                            binding.ivProfilePhoto.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
                             binding.ivProfilePhoto.setImageResource(R.drawable.profile)
                         }
                     }
