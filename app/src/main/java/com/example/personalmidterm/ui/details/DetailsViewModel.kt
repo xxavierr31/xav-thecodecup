@@ -30,7 +30,8 @@ class DetailsViewModel(
         if (coffee == null) 0L
         else {
             val flavorSurcharge = customization.flavors.size * 5000L
-            coffee.basePrice + flavorSurcharge
+            val shotSurcharge = customization.shots * 7000L
+            coffee.basePrice + flavorSurcharge + shotSurcharge
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
 

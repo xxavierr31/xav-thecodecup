@@ -53,6 +53,9 @@ class RewardsFragment : Fragment() {
         binding.btnRedeemPoints.setOnClickListener {
             findNavController().navigate(R.id.action_rewardsFragment_to_redeemFragment)
         }
+        binding.tvViewMore.setOnClickListener {
+            viewModel.toggleExpanded()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -70,8 +73,18 @@ class RewardsFragment : Fragment() {
                     }
                 }
                 launch {
-                    viewModel.transactions.collect { transactions ->
+                    viewModel.filteredTransactions.collect { transactions ->
                         adapter.submitList(transactions)
+                    }
+                }
+                launch {
+                    viewModel.isExpanded.collect { expanded ->
+                        binding.tvViewMore.text = if (expanded) "View Less" else "View More"
+                    }
+                }
+                launch {
+                    viewModel.transactions.collect { transactions ->
+                        binding.tvViewMore.visibility = if (transactions.size > 5) View.VISIBLE else View.GONE
                     }
                 }
             }
@@ -80,7 +93,7 @@ class RewardsFragment : Fragment() {
 
     private fun updateLoyaltyUi(stamps: Int) {
         val stampsContainer = binding.loyaltyVine.stampsContainer
-        binding.loyaltyVine.tvStampsCount.text = "$stamps/8 Blooming"
+        binding.loyaltyVine.tvStampsCount.text = "$stamps/8 Stamps"
         
         for (i in 0 until stampsContainer.childCount) {
             val slot = stampsContainer.getChildAt(i)

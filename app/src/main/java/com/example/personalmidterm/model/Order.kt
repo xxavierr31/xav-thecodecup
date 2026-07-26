@@ -14,6 +14,7 @@ data class Order(
     val resultStatus: OrderResultStatus,
     val totalPrice: Long,
     val timestamp: Long,
+    val address: String,
     val items: List<OrderItem> = emptyList()
 )
 

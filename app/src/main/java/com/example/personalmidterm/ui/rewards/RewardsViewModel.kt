@@ -5,9 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.personalmidterm.data.prefs.LoyaltyPrefs
 import com.example.personalmidterm.data.repository.RewardRepository
 import com.example.personalmidterm.model.RewardTransaction
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 
 class RewardsViewModel(
     private val rewardRepository: RewardRepository,
@@ -20,5 +18,17 @@ class RewardsViewModel(
         initialValue = emptyList()
     )
 
+    private val _isExpanded = MutableStateFlow(false)
+    val isExpanded: StateFlow<Boolean> = _isExpanded.asStateFlow()
+
+    val filteredTransactions: StateFlow<List<RewardTransaction>> = 
+        combine(transactions, _isExpanded) { list, expanded ->
+            if (expanded) list else list.take(5)
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     val loyaltyState = loyaltyPrefs.loyaltyState
+
+    fun toggleExpanded() {
+        _isExpanded.value = !_isExpanded.value
+    }
 }

@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     >
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
-        android:background="@color/card_cream"
+        android:backgroundTint="@color/card_cream"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/coffee_1" />
+                    android:src="@drawable/drinks_dark_espresso" />
             </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:id="@+id/recipe_name"

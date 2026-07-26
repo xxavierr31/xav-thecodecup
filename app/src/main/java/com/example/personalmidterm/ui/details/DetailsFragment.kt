@@ -101,7 +101,7 @@ class DetailsFragment : Fragment() {
         }
 
         binding.btnShotsMinus.setOnClickListener {
-            viewModel.updateCustomization { it.copy(shots = (it.shots - 1).coerceAtLeast(1)) }
+            viewModel.updateCustomization { it.copy(shots = (it.shots - 1).coerceAtLeast(0)) }
         }
         binding.btnShotsPlus.setOnClickListener {
             viewModel.updateCustomization { it.copy(shots = (it.shots + 1).coerceAtMost(4)) }

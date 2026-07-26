@@ -31,6 +31,6 @@ data class Customization(
     val sweetness: Sweetness = Sweetness.FIFTY,
     val temperature: Temperature = Temperature.ICED,
     val temperatureLevel: TemperatureLevel = TemperatureLevel.FIFTY,
-    val shots: Int = 1,
+    val shots: Int = 0,
     val flavors: List<Flavor> = emptyList()
 )

@@ -22,23 +22,24 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nav1_group"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/nav2_group"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/nav1"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@android:color/transparent"
-
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/menu"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/nav1_label"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/nav1_label"
@@ -60,22 +61,23 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nav2_group"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toEndOf="@id/nav1_group"
                 app:layout_constraintEnd_toStartOf="@id/nav3_group"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/nav2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@android:color/transparent"
-
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/gift"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/nav2_label"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/nav2_label"
@@ -97,23 +99,24 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nav3_group"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toEndOf="@id/nav2_group"
                 app:layout_constraintEnd_toStartOf="@id/nav4_group"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/nav3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@android:color/transparent"
-
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/home"
                     android:tint="@color/text_secondary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/nav3_label"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/nav3_label"
@@ -122,7 +125,6 @@
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/manrope_medium"
                     android:text="Home"
-
                     android:textColor="@color/text_secondary"
                     android:textSize="10sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -136,22 +138,23 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nav4_group"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toEndOf="@id/nav3_group"
                 app:layout_constraintEnd_toStartOf="@id/nav5_group"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/nav4"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@android:color/transparent"
-
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/profile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/nav4_label"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/nav4_label"
@@ -173,22 +176,23 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nav5_group"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toEndOf="@id/nav4_group"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/nav5"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@android:color/transparent"
-
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/bag"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/nav5_label"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/nav5_label"

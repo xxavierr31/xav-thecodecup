@@ -47,6 +47,7 @@ class HomeFragment : Fragment() {
         binding.header.userAvatar.visibility = View.VISIBLE
         binding.header.greetingContainer.visibility = View.VISIBLE
         binding.header.cartIcon.visibility = View.VISIBLE
+        binding.header.favoriteIcon.visibility = View.GONE
         
         binding.header.userAvatar.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
@@ -107,7 +108,7 @@ class HomeFragment : Fragment() {
 
     private fun updateLoyaltyUi(stamps: Int) {
         val stampsContainer = binding.loyaltyCard.stampsContainer
-        binding.loyaltyCard.tvStampsCount.text = "$stamps/8 Blooming"
+        binding.loyaltyCard.tvStampsCount.text = "$stamps/8 Stamps"
         
         for (i in 0 until stampsContainer.childCount) {
             val slot = stampsContainer.getChildAt(i)

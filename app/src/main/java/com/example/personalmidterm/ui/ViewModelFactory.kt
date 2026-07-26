@@ -37,7 +37,12 @@ object ViewModelFactory {
                     DetailsViewModel(container.coffeeRepository, container.cartRepository, container.favoriteRepository) as T
                 }
                 modelClass.isAssignableFrom(CartViewModel::class.java) -> {
-                    CartViewModel(container.cartRepository, container.orderRepository, container.loyaltyPrefs) as T
+                    CartViewModel(
+                        container.cartRepository,
+                        container.orderRepository,
+                        container.loyaltyPrefs,
+                        container.profileRepository
+                    ) as T
                 }
                 modelClass.isAssignableFrom(RewardsViewModel::class.java) -> {
                     RewardsViewModel(container.rewardRepository, container.loyaltyPrefs) as T

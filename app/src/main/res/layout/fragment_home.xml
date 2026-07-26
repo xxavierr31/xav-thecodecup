@@ -53,7 +53,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/coffee_1" />
+                            android:src="@drawable/drinks_dark_espresso" />
 
                         <View
                             android:layout_width="match_parent"
@@ -99,13 +99,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
-                            android:layout_marginBottom="16dp"
                             android:layout_marginEnd="120dp"
                             android:text="Ceremonial grade matcha blended with oat milk and a hint of pressed cherry blossom syrup."
                             android:textColor="@color/theme_muted"
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hero_title"
                             app:layout_constraintBottom_toTopOf="@id/hero_button" />
 
                         <com.google.android.material.button.MaterialButton

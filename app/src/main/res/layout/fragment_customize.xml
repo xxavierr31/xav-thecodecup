@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/coffee_1" />
+                    android:src="@drawable/drinks_dark_espresso" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -362,12 +362,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/manrope_bold"
-                android:text="Espresso Shots"
+                android:text="Extra Shots"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_temp_level_scale_none"
                 app:layout_constraintBottom_toBottomOf="@id/shots_stepper_bg" />
+
+            <TextView
+                android:id="@+id/tv_shots_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/manrope_medium"
+                android:text="(Max 4 shots, each +7.000đ)"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_shots_label"
+                android:layout_marginTop="2dp"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/shots_stepper_bg"
@@ -401,7 +413,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/manrope_bold"
                         android:gravity="center"
-                        android:text="2"
+                        android:text="0"
                         android:textColor="@color/text_primary"
                         android:textSize="15sp" />
 
@@ -423,7 +435,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/manrope_bold"
-                android:text="Add Flavor"
+                android:text="Add Flavored Syrup"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"

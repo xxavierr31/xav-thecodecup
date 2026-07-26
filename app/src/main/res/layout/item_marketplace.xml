@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/coffee_1" />
+                tools:src="@drawable/drinks_dark_espresso" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -51,16 +51,20 @@
         <TextView
             android:id="@+id/tv_item_subtitle"
             android:layout_width="0dp"
+            android:maxWidth="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/manrope_regular"
             android:text="Calming espresso &amp; milk"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/text_secondary"
-            android:textSize="13sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@id/item_icon_bg"
             app:layout_constraintTop_toBottomOf="@id/tv_item_title"
-            app:layout_constraintEnd_toStartOf="@id/tv_item_points" />
+            app:layout_constraintEnd_toStartOf="@id/btn_redeem" />
 
         <TextView
             android:id="@+id/tv_item_points"
@@ -82,12 +86,12 @@
             android:insetBottom="0dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="10dp"
             android:paddingVertical="6dp"
             android:text="Redeem"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="13sp"
+            android:textSize="12sp"
             app:cornerRadius="18dp"
             app:backgroundTint="@color/theme_brown"
             app:layout_constraintEnd_toEndOf="parent"

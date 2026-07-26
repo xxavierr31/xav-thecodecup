@@ -73,6 +73,15 @@ class RedeemFragment : Fragment() {
                         adapter.submitList(items, viewModel.loyaltyState.value.totalPoints)
                     }
                 }
+                launch {
+                    viewModel.canRedeemAnything.collect { canRedeem ->
+                        binding.tvBalanceSubtitle.text = if (canRedeem) {
+                            "You have enough points to redeem a gift!"
+                        } else {
+                            "Start placing orders to earn more points."
+                        }
+                    }
+                }
             }
         }
     }

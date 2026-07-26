@@ -13,7 +13,8 @@ data class OrderEntity(
     val status: OrderStatus,
     val resultStatus: OrderResultStatus,
     val totalPrice: Long,
-    val timestamp: Long
+    val timestamp: Long,
+    val address: String
 ) {
     fun toDomainModel(items: List<OrderItem>) = Order(
         id = id,
@@ -21,6 +22,7 @@ data class OrderEntity(
         resultStatus = resultStatus,
         totalPrice = totalPrice,
         timestamp = timestamp,
+        address = address,
         items = items
     )
 }

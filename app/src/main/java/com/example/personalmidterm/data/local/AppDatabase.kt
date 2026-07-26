@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
         FavoriteEntity::class,
         RedeemableItemEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -65,17 +65,26 @@ abstract class AppDatabase : RoomDatabase() {
                 val redeemableDao = database.redeemableDao()
 
                 coffeeDao.insertAll(listOf(
-                    CoffeeEntity(name = "Heritage Americano", description = "Balanced espresso, steamed milk, and dense foam", basePrice = 70000, imageRes = R.drawable.coffee_1, category = Category.CLASSIC),
-                    CoffeeEntity(name = "Midnight Latte", description = "Rich espresso with velvety microfoam and chocolate notes", basePrice = 85000, imageRes = R.drawable.coffee_1, category = Category.SPECIAL),
-                    CoffeeEntity(name = "Golden Cappuccino", description = "Classic equal parts espresso, milk, and foam with a hint of gold", basePrice = 75000, imageRes = R.drawable.coffee_1, category = Category.CLASSIC),
-                    CoffeeEntity(name = "Emerald Matcha Latte", description = "Premium ceremonial matcha with smooth steamed milk", basePrice = 90000, imageRes = R.drawable.coffee_1, category = Category.SPECIAL),
-                    CoffeeEntity(name = "Caramel Macchiato", description = "Freshly steamed milk with vanilla-flavored syrup marked with espresso", basePrice = 80000, imageRes = R.drawable.coffee_1, category = Category.CLASSIC)
+                    CoffeeEntity(name = "Americano", description = "Bold espresso diluted with water for a classic, smooth finish.", basePrice = 45000, imageRes = R.drawable.drinks_americano, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Cappuccino", description = "Perfectly balanced espresso, steamed milk, and rich foam.", basePrice = 50000, imageRes = R.drawable.drinks_cappuccino, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Mocha", description = "Rich chocolate meets bold espresso and velvety milk.", basePrice = 55000, imageRes = R.drawable.drinks_mocha, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Vietnamese Coffee", description = "Traditional drip coffee with sweet condensed milk.", basePrice = 40000, imageRes = R.drawable.drinks_vietnamese_coffee, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Dark Espresso", description = "Intense, concentrated shot of our finest dark roast.", basePrice = 40000, imageRes = R.drawable.drinks_dark_espresso, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Matcha Latte", description = "Premium ceremonial grade matcha whisked with creamy milk.", basePrice = 55000, imageRes = R.drawable.drinks_matcha_latte, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Fluffy Cafe Au Lait", description = "Light and airy blend of coffee and extra frothy milk.", basePrice = 50000, imageRes = R.drawable.drinks_fluffy_cafe_au_lait, category = Category.CLASSIC),
+                    CoffeeEntity(name = "Cream Mocha", description = "Indulgent mocha topped with a layer of luxurious silk cream.", basePrice = 65000, imageRes = R.drawable.drinks_cream_mocha, category = Category.SPECIAL),
+                    CoffeeEntity(name = "Dreamy Clouds Tea", description = "A magical swirl of blue and purple, floral and creamy with chewy delight.", basePrice = 60000, imageRes = R.drawable.drinks_dreamy_clouds_tea, category = Category.SPECIAL),
+                    CoffeeEntity(name = "Dulce De Leche Latte", description = "Sweet, warm caramel-toffee notes blended with smooth espresso.", basePrice = 70000, imageRes = R.drawable.drinks_dulce_de_leche_latte, category = Category.SPECIAL),
+                    CoffeeEntity(name = "Matcha Cold Foam", description = "Refreshing iced coffee drink topped with a novel, velvety matcha-infused foam.", basePrice = 65000, imageRes = R.drawable.drinks_matcha_cold_foam, category = Category.SPECIAL),
+                    CoffeeEntity(name = "Matcha Fizz Mocktail", description = "Sparkling and bright matcha infusion with a tangy hint of citrus.", basePrice = 60000, imageRes = R.drawable.drinks_matcha_fizz_mocktail, category = Category.SPECIAL)
                 ))
 
                 redeemableDao.insertAll(listOf(
-                    RedeemableItemEntity(name = "Free Classic Coffee", description = "Any classic drink from our menu", pointsCost = 500, imageRes = R.drawable.coffee_1),
-                    RedeemableItemEntity(name = "The Code Cup Tote Bag", description = "Durable canvas bag for your daily brew", pointsCost = 1500, imageRes = R.drawable.bag),
-                    RedeemableItemEntity(name = "Botanical Gift Set", description = "A curated collection of coffee-themed succulents", pointsCost = 3000, imageRes = R.drawable.gift)
+                    RedeemableItemEntity(name = "Free Classic Brew", description = "Any classic drink from our menu", pointsCost = 300, imageRes = R.drawable.drinks_dark_espresso),
+                    RedeemableItemEntity(name = "Free Special Brew", description = "Any special drink from our menu", pointsCost = 500, imageRes = R.drawable.drinks_dulce_de_leche_latte),
+                    RedeemableItemEntity(name = "Reusable Straw Set", description = "Eco-friendly stainless steel straws with cleaning brush", pointsCost = 800, imageRes = R.drawable.redeem_reusable_straw_set),
+                    RedeemableItemEntity(name = "Ceramic Mug", description = "Durable ceramic mug for everyday use", pointsCost = 1500, imageRes = R.drawable.redeem_ceramic_mug),
+                    RedeemableItemEntity(name = "Premium Thermos ", description = "High-quality vacuum flask ideal for travel or work.", pointsCost = 2000, imageRes = R.drawable.redeem_thermos)
                 ))
             }
         }

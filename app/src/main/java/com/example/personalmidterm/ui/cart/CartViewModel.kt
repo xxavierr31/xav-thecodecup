@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 class CartViewModel(
     private val cartRepository: CartRepository,
     private val orderRepository: OrderRepository,
-    private val loyaltyPrefs: LoyaltyPrefs
+    private val loyaltyPrefs: LoyaltyPrefs,
+    private val profileRepository: com.example.personalmidterm.data.repository.ProfileRepository
 ) : ViewModel() {
 
     val cartItems: StateFlow<List<CartItem>> = cartRepository.cartItems.stateIn(
@@ -83,7 +84,8 @@ class CartViewModel(
         viewModelScope.launch {
             val items = cartItems.value
             if (items.isNotEmpty()) {
-                val orderId = orderRepository.placeOrder(items, total.value)
+                val address = profileRepository.profile.value.address
+                val orderId = orderRepository.placeOrder(items, total.value, address)
                 cartRepository.clearCart()
                 onSuccess(orderId)
             }

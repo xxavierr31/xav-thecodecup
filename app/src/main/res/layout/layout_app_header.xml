@@ -95,11 +95,10 @@
         app:tint="@color/theme_brown"
         android:src="@drawable/ic_full_heart"
         android:backgroundTint="@android:color/transparent"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cart_icon"
         app:layout_constraintTop_toTopOf="parent"
-
         android:layout_marginEnd="4dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,6 +57,8 @@ class OrderAdapter(
                 )
             )
             binding.tvStatusBadge.setTextColor(binding.root.context.getColor(R.color.white))
+            
+            binding.tvOrderAddress.text = order.address
 
             binding.root.setOnClickListener { onOrderClick(order) }
         }

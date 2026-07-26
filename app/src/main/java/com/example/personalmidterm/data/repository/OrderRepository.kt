@@ -23,12 +23,13 @@ class OrderRepository(
         }
     }
 
-    suspend fun placeOrder(cartItems: List<CartItem>, finalTotal: Long): Long {
+    suspend fun placeOrder(cartItems: List<CartItem>, finalTotal: Long, address: String): Long {
         val orderEntity = OrderEntity(
             status = OrderStatus.ONGOING,
             resultStatus = OrderResultStatus.DELIVERED,
             totalPrice = finalTotal,
-            timestamp = System.currentTimeMillis()
+            timestamp = System.currentTimeMillis(),
+            address = address
         )
         
         val orderItemEntities = cartItems.map { item ->

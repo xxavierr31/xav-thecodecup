@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/coffee_1" />
+                tools:src="@drawable/drinks_dark_espresso" />
 
         </com.google.android.material.card.MaterialCardView>
 

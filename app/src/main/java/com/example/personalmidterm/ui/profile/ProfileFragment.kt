@@ -51,8 +51,7 @@ class ProfileFragment : Fragment() {
             toggleEditMode(true)
         }
         binding.btnSaveDetails.setOnClickListener {
-            val name = binding.tvProfileName.text.toString() // Wait, name is a TextView. 
-            // In fragment_profile.xml, only email, phone, address have EditTexts.
+            val name = binding.etProfileName.text.toString()
             val email = binding.etEmailValue.text.toString()
             val phone = binding.etPhoneValue.text.toString()
             val address = binding.etAddressValue.text.toString()
@@ -65,6 +64,9 @@ class ProfileFragment : Fragment() {
     private fun toggleEditMode(isEditing: Boolean) {
         binding.btnEditDetails.visibility = if (isEditing) View.GONE else View.VISIBLE
         binding.btnSaveDetails.visibility = if (isEditing) View.VISIBLE else View.GONE
+        
+        binding.tvProfileName.visibility = if (isEditing) View.GONE else View.VISIBLE
+        binding.etProfileName.visibility = if (isEditing) View.VISIBLE else View.GONE
         
         binding.tvEmailValue.visibility = if (isEditing) View.GONE else View.VISIBLE
         binding.etEmailValue.visibility = if (isEditing) View.VISIBLE else View.GONE
@@ -82,6 +84,7 @@ class ProfileFragment : Fragment() {
                 launch {
                     viewModel.profile.collect { profile ->
                         binding.tvProfileName.text = profile.name
+                        binding.etProfileName.setText(profile.name)
                         binding.tvEmailValue.text = profile.email
                         binding.etEmailValue.setText(profile.email)
                         binding.tvPhoneValue.text = profile.phone
