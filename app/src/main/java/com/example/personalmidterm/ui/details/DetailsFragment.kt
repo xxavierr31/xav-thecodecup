@@ -61,6 +61,7 @@ class DetailsFragment : Fragment() {
         binding.header.screenTitle.text = "Customize"
         binding.header.screenTitle.visibility = View.VISIBLE
         binding.header.favoriteIcon.visibility = View.VISIBLE
+        binding.header.cartIcon.setImageResource(R.drawable.ic_cart)
         binding.header.cartIcon.visibility = View.VISIBLE
         
         binding.header.favoriteIcon.setOnClickListener {

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.personalmidterm.CodeCupApplication
 import com.example.personalmidterm.data.repository.*
 import com.example.personalmidterm.ui.cart.CartViewModel
+import com.example.personalmidterm.ui.cart.VoucherViewModel
 import com.example.personalmidterm.ui.details.DetailsViewModel
 import com.example.personalmidterm.ui.home.HomeViewModel
 import com.example.personalmidterm.ui.menu.MenuViewModel
@@ -41,8 +42,12 @@ object ViewModelFactory {
                         container.cartRepository,
                         container.orderRepository,
                         container.loyaltyPrefs,
-                        container.profileRepository
+                        container.profileRepository,
+                        container.voucherRepository
                     ) as T
+                }
+                modelClass.isAssignableFrom(VoucherViewModel::class.java) -> {
+                    VoucherViewModel(container.voucherRepository) as T
                 }
                 modelClass.isAssignableFrom(RewardsViewModel::class.java) -> {
                     RewardsViewModel(container.rewardRepository, container.loyaltyPrefs) as T

@@ -14,6 +14,7 @@ interface AppContainer {
     val favoriteRepository: FavoriteRepository
     val redeemableRepository: RedeemableRepository
     val profileRepository: ProfileRepository
+    val voucherRepository: VoucherRepository
     val loyaltyPrefs: LoyaltyPrefs
 }
 
@@ -49,5 +50,9 @@ class AppDataContainer(private val context: Context) : AppContainer {
 
     override val profileRepository: ProfileRepository by lazy {
         ProfileRepository(profilePrefs)
+    }
+
+    override val voucherRepository: VoucherRepository by lazy {
+        VoucherRepository(database.voucherDao())
     }
 }

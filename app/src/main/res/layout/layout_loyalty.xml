@@ -37,7 +37,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     android:text="0/8 Stamps"
-    android:textSize="18sp"
+    android:textSize="16sp"
     android:textColor="@color/theme_maroon"
     android:fontFamily="@font/manrope_bold"
     app:layout_constraintBottom_toTopOf="@+id/loyalty_vine"/>

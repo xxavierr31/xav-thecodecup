@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
     private fun setupHeader() {
         binding.header.userAvatar.visibility = View.VISIBLE
         binding.header.greetingContainer.visibility = View.VISIBLE
+        binding.header.cartIcon.setImageResource(R.drawable.ic_cart)
         binding.header.cartIcon.visibility = View.VISIBLE
         binding.header.favoriteIcon.visibility = View.GONE
         
@@ -83,6 +84,8 @@ class HomeFragment : Fragment() {
                 launch {
                     viewModel.favorites.collect { favorites ->
                         adapter.submitList(favorites)
+                        binding.savedRecipesRecycler.visibility = if (favorites.isEmpty()) View.GONE else View.VISIBLE
+                        binding.savedRecipesEmpty.visibility = if (favorites.isEmpty()) View.VISIBLE else View.GONE
                     }
                 }
                 launch {

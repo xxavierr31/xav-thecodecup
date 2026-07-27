@@ -6,6 +6,7 @@ import com.example.personalmidterm.data.prefs.LoyaltyPrefs
 import com.example.personalmidterm.data.repository.CartRepository
 import com.example.personalmidterm.data.repository.OrderRepository
 import com.example.personalmidterm.model.CartItem
+import com.example.personalmidterm.model.VoucherType
 import com.example.personalmidterm.model.rankTiers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -14,7 +15,8 @@ class CartViewModel(
     private val cartRepository: CartRepository,
     private val orderRepository: OrderRepository,
     private val loyaltyPrefs: LoyaltyPrefs,
-    private val profileRepository: com.example.personalmidterm.data.repository.ProfileRepository
+    private val profileRepository: com.example.personalmidterm.data.repository.ProfileRepository,
+    private val voucherRepository: com.example.personalmidterm.data.repository.VoucherRepository
 ) : ViewModel() {
 
     val cartItems: StateFlow<List<CartItem>> = cartRepository.cartItems.stateIn(
@@ -41,30 +43,58 @@ class CartViewModel(
         (subtotal * discount).toLong()
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
 
-    val total: StateFlow<Long> = combine(subtotal, discountAmount) { subtotal, amount ->
-        subtotal - amount
+    val selectedVoucher = voucherRepository.selectedVoucher
+
+    val voucherDiscountAmount: StateFlow<Long> = combine(subtotal, selectedVoucher) { sub, voucher ->
+        if (voucher == null || sub == 0L || sub < voucher.minSpend) 0L
+        else {
+            val amount = when (voucher.type) {
+                VoucherType.FLAT -> voucher.value
+                VoucherType.PERCENTAGE -> (sub * (voucher.value / 100.0)).toLong()
+            }
+            if (voucher.maxDiscount != null) amount.coerceAtMost(voucher.maxDiscount) else amount
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
+
+    val total: StateFlow<Long> = combine(subtotal, discountAmount, voucherDiscountAmount) { sub, rankDisc, voucherDisc ->
+        (sub - rankDisc - voucherDisc).coerceAtLeast(0L)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
 
     data class DiscountUiState(
         val rankName: String = "Sprout",
         val discountPercent: Int = 0,
-        val discountAmount: Long = 0L,
+        val rankDiscountAmount: Long = 0L,
+        val voucherCode: String? = null,
+        val voucherDiscountAmount: Long = 0L,
         val subtotal: Long = 0L,
-        val isVisible: Boolean = false
+        val isRankDiscountVisible: Boolean = false,
+        val isVoucherDiscountVisible: Boolean = false
     )
 
     val discountUiState: StateFlow<DiscountUiState> = combine(
         rankName,
         discount,
         discountAmount,
+        selectedVoucher,
+        voucherDiscountAmount,
         subtotal
-    ) { name, disc, amount, sub ->
+    ) { args ->
+        val name = args[0] as String
+        val disc = args[1] as Double
+        val rankAmt = args[2] as Long
+        val voucher = args[3] as com.example.personalmidterm.model.Voucher?
+        val vAmt = args[4] as Long
+        val sub = args[5] as Long
+        
         DiscountUiState(
             rankName = name,
             discountPercent = (disc * 100).toInt(),
-            discountAmount = amount,
+            rankDiscountAmount = rankAmt,
+            voucherCode = voucher?.code,
+            voucherDiscountAmount = vAmt,
             subtotal = sub,
-            isVisible = disc > 0
+            isRankDiscountVisible = disc > 0,
+            isVoucherDiscountVisible = vAmt > 0
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DiscountUiState())
 
@@ -103,6 +133,7 @@ class CartViewModel(
                 val address = profileRepository.profile.value.address
                 val orderId = orderRepository.placeOrder(items, total.value, address)
                 cartRepository.clearCart()
+                voucherRepository.clearSelectedVoucher()
                 onSuccess(orderId)
             }
         }

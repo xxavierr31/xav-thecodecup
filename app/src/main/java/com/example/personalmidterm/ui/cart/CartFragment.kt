@@ -52,7 +52,13 @@ class CartFragment : Fragment() {
         binding.header.screenTitle.visibility = View.VISIBLE
         binding.header.backButton.visibility = View.VISIBLE
         binding.header.favoriteIcon.visibility = View.GONE
-        binding.header.cartIcon.visibility = View.GONE
+        
+        // Swap Cart icon for Voucher icon
+        binding.header.cartIcon.setImageResource(R.drawable.ic_voucher)
+        binding.header.cartIcon.visibility = View.VISIBLE
+        binding.header.cartIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_cartFragment_to_voucherFragment)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -91,6 +97,13 @@ class CartFragment : Fragment() {
         binding.emptyState.findViewById<View>(R.id.btn_browse_menu).setOnClickListener {
             findNavController().navigate(R.id.menuFragment)
         }
+        binding.btnToggleBreakdown.setOnClickListener {
+            val isVisible = binding.breakdownContainer.visibility == View.VISIBLE
+            val nextVisibility = if (isVisible) View.GONE else View.VISIBLE
+            binding.breakdownContainer.visibility = nextVisibility
+            binding.divider.visibility = nextVisibility
+            binding.btnToggleBreakdown.animate().rotation(if (isVisible) -180f else 0f).setDuration(200).start()
+        }
     }
 
     private fun observeViewModel() {
@@ -102,6 +115,9 @@ class CartFragment : Fragment() {
                         binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
                         binding.rvCartItems.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
                         binding.btnCheckout.isEnabled = items.isNotEmpty()
+                        
+                        // Hide voucher icon if cart is empty
+                        binding.header.cartIcon.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
                     }
                 }
                 launch {
@@ -111,22 +127,41 @@ class CartFragment : Fragment() {
                 }
                 launch {
                     viewModel.discountUiState.collect { state ->
-                        if (state.isVisible) {
+                        binding.tvSubtotalVal.text = CurrencyFormatter.format(state.subtotal)
+                        
+                        if (state.isRankDiscountVisible) {
                             binding.tvRankPerk.visibility = View.VISIBLE
                             binding.tvRankPerkVal.visibility = View.VISIBLE
-                            binding.tvOldTotalVal.visibility = View.VISIBLE
-                            binding.divider.visibility = View.VISIBLE
-                            
                             binding.tvRankPerk.text = "${state.rankName} (${state.discountPercent}% off)"
-                            binding.tvRankPerkVal.text = "-${CurrencyFormatter.format(state.discountAmount)}"
-                            
-                            binding.tvOldTotalVal.text = CurrencyFormatter.format(state.subtotal)
-                            binding.tvOldTotalVal.paintFlags = binding.tvOldTotalVal.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+                            binding.tvRankPerkVal.text = "-${CurrencyFormatter.format(state.rankDiscountAmount)}"
                         } else {
                             binding.tvRankPerk.visibility = View.GONE
                             binding.tvRankPerkVal.visibility = View.GONE
-                            binding.tvOldTotalVal.visibility = View.GONE
+                        }
+
+                        if (state.isVoucherDiscountVisible) {
+                            binding.tvVoucherLabel.visibility = View.VISIBLE
+                            binding.tvVoucherVal.visibility = View.VISIBLE
+                            binding.tvVoucherLabel.text = "Voucher (${state.voucherCode})"
+                            binding.tvVoucherVal.text = "-${CurrencyFormatter.format(state.voucherDiscountAmount)}"
+                        } else {
+                            binding.tvVoucherLabel.visibility = View.GONE
+                            binding.tvVoucherVal.visibility = View.GONE
+                        }
+
+                        if (state.isRankDiscountVisible || state.isVoucherDiscountVisible) {
+                            binding.btnToggleBreakdown.visibility = View.VISIBLE
+                            binding.tvOldTotalVal.visibility = View.VISIBLE
+                            binding.tvOldTotalVal.text = CurrencyFormatter.format(state.subtotal)
+                            binding.tvOldTotalVal.paintFlags = binding.tvOldTotalVal.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+                            
+                            // Sync divider with container visibility
+                            binding.divider.visibility = binding.breakdownContainer.visibility
+                        } else {
+                            binding.btnToggleBreakdown.visibility = View.GONE
+                            binding.breakdownContainer.visibility = View.GONE
                             binding.divider.visibility = View.GONE
+                            binding.tvOldTotalVal.visibility = View.GONE
                         }
                     }
                 }

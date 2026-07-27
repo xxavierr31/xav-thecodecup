@@ -85,7 +85,16 @@
         <action
             android:id="@+id/action_cartFragment_to_orderSuccessFragment"
             app:destination="@id/orderSuccessFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/voucherFragment"
+        android:name="com.example.personalmidterm.ui.cart.VoucherFragment"
+        android:label="Vouchers"
+        tools:layout="@layout/fragment_vouchers" />
 
     <fragment
         android:id="@+id/orderSuccessFragment"

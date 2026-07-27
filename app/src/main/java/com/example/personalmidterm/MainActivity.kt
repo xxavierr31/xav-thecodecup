@@ -16,7 +16,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.personalmidterm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    
     private lateinit var binding: ActivityMainBinding
 
     private val requestPermissionLauncher = registerForActivityResult(

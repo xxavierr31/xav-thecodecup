@@ -10,6 +10,7 @@ import com.example.personalmidterm.R
 import com.example.personalmidterm.data.local.dao.*
 import com.example.personalmidterm.data.local.entity.*
 import com.example.personalmidterm.model.Category
+import com.example.personalmidterm.model.VoucherType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,9 +23,10 @@ import kotlinx.coroutines.launch
         OrderItemEntity::class,
         RewardTransactionEntity::class,
         FavoriteEntity::class,
-        RedeemableItemEntity::class
+        RedeemableItemEntity::class,
+        VoucherEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -35,6 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun rewardDao(): RewardDao
     abstract fun favoriteDao(): FavoriteDao
     abstract fun redeemableDao(): RedeemableDao
+    abstract fun voucherDao(): VoucherDao
 
     companion object {
         @Volatile
@@ -63,6 +66,7 @@ abstract class AppDatabase : RoomDatabase() {
             private suspend fun seedDatabase(database: AppDatabase) {
                 val coffeeDao = database.coffeeDao()
                 val redeemableDao = database.redeemableDao()
+                val voucherDao = database.voucherDao()
 
                 coffeeDao.insertAll(listOf(
                     CoffeeEntity(name = "Americano", description = "Bold espresso diluted with water for a classic, smooth finish.", basePrice = 45000, imageRes = R.drawable.drinks_americano, category = Category.CLASSIC, canBeHot = true, canBeIced = true),
@@ -83,8 +87,22 @@ abstract class AppDatabase : RoomDatabase() {
                     RedeemableItemEntity(name = "Free Classic Brew", description = "Any classic drink from our menu", pointsCost = 300, imageRes = R.drawable.drinks_dark_espresso),
                     RedeemableItemEntity(name = "Free Special Brew", description = "Any special drink from our menu", pointsCost = 500, imageRes = R.drawable.drinks_dulce_de_leche_latte),
                     RedeemableItemEntity(name = "Reusable Straw Set", description = "Eco-friendly stainless steel straws with cleaning brush", pointsCost = 800, imageRes = R.drawable.redeem_reusable_straw_set),
-                    RedeemableItemEntity(name = "Ceramic Mug", description = "Durable ceramic mug for everyday use", pointsCost = 1500, imageRes = R.drawable.redeem_ceramic_mug),
-                    RedeemableItemEntity(name = "Premium Thermos ", description = "High-quality vacuum flask ideal for travel or work.", pointsCost = 2000, imageRes = R.drawable.redeem_thermos)
+                    RedeemableItemEntity(name = "Ceramic Mug", description = "Durable, stylish for everyday use", pointsCost = 1500, imageRes = R.drawable.redeem_ceramic_mug),
+                    RedeemableItemEntity(name = "Premium Thermos ", description = "High-quality, ideal for travel or work.", pointsCost = 2000, imageRes = R.drawable.redeem_thermos)
+                ))
+
+                val farFuture = System.currentTimeMillis() + (1000L * 60 * 60 * 24 * 365) // 1 year from now
+                voucherDao.insertAll(listOf(
+                    VoucherEntity(code = "WELCOME20", description = "20.000đ off your order", type = VoucherType.FLAT, value = 20000, minSpend = 0, maxDiscount = null, expiryDate = farFuture),
+                    VoucherEntity(code = "COFFEE50", description = "50% off, max 30.000đ", type = VoucherType.PERCENTAGE, value = 50, minSpend = 60000, maxDiscount = 30000, expiryDate = farFuture),
+                    VoucherEntity(code = "BEANFRIDAY", description = "15.000đ off orders over 40.000đ", type = VoucherType.FLAT, value = 15000, minSpend = 40000, maxDiscount = null, expiryDate = farFuture),
+                    VoucherEntity(code = "SUMMERMATCH", description = "10% off, max 50.000đ", type = VoucherType.PERCENTAGE, value = 10, minSpend = 100000, maxDiscount = 50000, expiryDate = farFuture),
+                    VoucherEntity(code = "CODECUP10", description = "10% off orders over 50.000đ", type = VoucherType.PERCENTAGE, value = 10, minSpend = 50000, maxDiscount = null, expiryDate = farFuture),
+                    VoucherEntity(code = "BOLDMORNING", description = "5.000đ off, start your day bold", type = VoucherType.FLAT, value = 5000, minSpend = 0, maxDiscount = null, expiryDate = farFuture),
+                    VoucherEntity(code = "TEATIME", description = "15% off tea specials, max 20.000đ", type = VoucherType.PERCENTAGE, value = 15, minSpend = 50000, maxDiscount = 20000, expiryDate = farFuture),
+                    VoucherEntity(code = "FIRSTORDER", description = "30.000đ off your first 100.000đ order", type = VoucherType.FLAT, value = 30000, minSpend = 100000, maxDiscount = null, expiryDate = farFuture),
+                    VoucherEntity(code = "WEEKENDVIBE", description = "20% off weekend treats, max 40.000đ", type = VoucherType.PERCENTAGE, value = 20, minSpend = 80000, maxDiscount = 40000, expiryDate = farFuture),
+                    VoucherEntity(code = "LOYALTYLUV", description = "25.000đ off big orders over 150.000đ", type = VoucherType.FLAT, value = 25000, minSpend = 150000, maxDiscount = null, expiryDate = farFuture)
                 ))
             }
         }
