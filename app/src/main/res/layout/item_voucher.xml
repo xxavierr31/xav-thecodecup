@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
+            android:buttonTint="@color/text_secondary"
             android:button="@drawable/radio_button_selector"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
