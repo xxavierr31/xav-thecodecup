@@ -101,7 +101,6 @@ class CartFragment : Fragment() {
             val isVisible = binding.breakdownContainer.visibility == View.VISIBLE
             val nextVisibility = if (isVisible) View.GONE else View.VISIBLE
             binding.breakdownContainer.visibility = nextVisibility
-            binding.divider.visibility = nextVisibility
             binding.btnToggleBreakdown.animate().rotation(if (isVisible) -180f else 0f).setDuration(200).start()
         }
     }
@@ -154,13 +153,9 @@ class CartFragment : Fragment() {
                             binding.tvOldTotalVal.visibility = View.VISIBLE
                             binding.tvOldTotalVal.text = CurrencyFormatter.format(state.subtotal)
                             binding.tvOldTotalVal.paintFlags = binding.tvOldTotalVal.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
-                            
-                            // Sync divider with container visibility
-                            binding.divider.visibility = binding.breakdownContainer.visibility
                         } else {
                             binding.btnToggleBreakdown.visibility = View.GONE
                             binding.breakdownContainer.visibility = View.GONE
-                            binding.divider.visibility = View.GONE
                             binding.tvOldTotalVal.visibility = View.GONE
                         }
                     }

@@ -96,6 +96,7 @@ class HomeFragment : Fragment() {
                 launch {
                     viewModel.profile.collect { profile ->
                         val greeting = getGreeting()
+                        val padding = (8 * resources.displayMetrics.density).toInt()
                         binding.header.greetingText.text = "$greeting, ${profile.name}"
                         
                         if (profile.imagePath != null) {
@@ -105,13 +106,13 @@ class HomeFragment : Fragment() {
                                 binding.header.userAvatar.imageTintList = null
                                 binding.header.userAvatar.setImageURI(Uri.fromFile(file))
                             } else {
-                                binding.header.userAvatar.setPadding(8, 8, 8, 8)
-                                binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+                                binding.header.userAvatar.setPadding(padding, padding, padding, padding)
+                                binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.theme_brown))
                                 binding.header.userAvatar.setImageResource(R.drawable.profile)
                             }
                         } else {
-                            binding.header.userAvatar.setPadding(8, 8, 8, 8)
-                            binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+                            binding.header.userAvatar.setPadding(padding, padding, padding, padding)
+                            binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.theme_brown))
                             binding.header.userAvatar.setImageResource(R.drawable.profile)
                         }
                     }

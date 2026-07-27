@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
     android:padding="20dp">
 
     <View
@@ -31,7 +32,7 @@
         android:id="@+id/sheet_close_btn"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:padding="40dp"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_sheet_title"
         app:layout_constraintBottom_toBottomOf="@id/tv_sheet_title"
@@ -49,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintTop_toBottomOf="@id/tv_sheet_title"
-        app:layout_constraintStart_toStartOf="@id/tv_sheet_title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/sheet_divider"
         app:layout_constraintVertical_bias="0.0">
@@ -75,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="cart_content_scroll" />
+        app:constraint_referenced_ids="cart_content_scroll,sheet_divider,tv_sheet_total_label,tv_sheet_total_val,btn_go_to_cart" />
 
     <View
         android:id="@+id/sheet_divider"
@@ -133,7 +134,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-    <!-- EMPTY STATE — hidden by default, toggle visibility when cart is empty -->
+
+    <!-- EMPTY STATE -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/empty_state"
         android:layout_width="0dp"
@@ -143,6 +145,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
         tools:visibility="visible">
 
         <ImageView

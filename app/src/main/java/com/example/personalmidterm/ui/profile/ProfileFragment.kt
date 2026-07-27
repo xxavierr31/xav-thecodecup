@@ -142,22 +142,27 @@ class ProfileFragment : Fragment() {
                         binding.etPhoneValue.setText(profile.phone)
                         binding.tvAddressValue.text = profile.address
                         binding.etAddressValue.setText(profile.address)
+                        val padding = (40 * resources.displayMetrics.density).toInt()
 
                         if (profile.imagePath != null) {
                             val file = File(profile.imagePath)
                             if (file.exists()) {
                                 binding.ivProfilePhoto.setPadding(0, 0, 0, 0)
                                 binding.ivProfilePhoto.imageTintList = null
+                                binding.ivProfilePhoto.scaleType = android.widget.ImageView.ScaleType.CENTER_CROP
                                 binding.ivProfilePhoto.setImageURI(Uri.fromFile(file))
                             } else {
                                 // Fallback if file was deleted
-                                binding.ivProfilePhoto.setPadding(28, 28, 28, 28)
+                                binding.ivProfilePhoto.setPadding(padding, padding, padding, padding)
                                 binding.ivProfilePhoto.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+                                binding.ivProfilePhoto.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
                                 binding.ivProfilePhoto.setImageResource(R.drawable.profile)
                             }
                         } else {
-                            binding.ivProfilePhoto.setPadding(28, 28, 28, 28)
+
+                            binding.ivProfilePhoto.setPadding(padding, padding, padding, padding)
                             binding.ivProfilePhoto.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+                            binding.ivProfilePhoto.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
                             binding.ivProfilePhoto.setImageResource(R.drawable.profile)
                         }
                     }

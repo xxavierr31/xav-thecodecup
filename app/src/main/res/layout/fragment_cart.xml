@@ -278,7 +278,7 @@
             app:layout_constraintTop_toBottomOf="@id/breakdown_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_goneMarginTop="0dp" />
+            app:layout_goneMarginTop="8dp" />
 
         <!-- FINAL PRICE SUMMARY (strikethrough + final total) -->
         <androidx.constraintlayout.widget.ConstraintLayout
