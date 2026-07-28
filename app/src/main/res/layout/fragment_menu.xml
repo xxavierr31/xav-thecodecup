@@ -138,7 +138,7 @@
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="10dp"
                 android:text="Classics"
-                android:backgroundTint="@color/card_cream"
+                app:backgroundTint="@color/card_cream"
                 android:textAllCaps="false"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"

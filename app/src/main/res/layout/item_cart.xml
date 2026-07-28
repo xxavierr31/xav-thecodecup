@@ -97,7 +97,7 @@
                     android:id="@+id/btn_qty_plus"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:background="@drawable/cart_quantity_button"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_plus"
                     app:tint="@color/text_secondary" />
 
@@ -115,7 +115,7 @@
                     android:id="@+id/btn_qty_minus"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:background="@drawable/cart_quantity_button"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_minus"
                     app:tint="@color/text_secondary" />
 

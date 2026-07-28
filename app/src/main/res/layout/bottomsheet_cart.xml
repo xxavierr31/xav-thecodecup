@@ -38,6 +38,7 @@
         app:layout_constraintBottom_toBottomOf="@id/tv_sheet_title"
         android:src="@drawable/ic_cross"
         android:scaleType="centerInside"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:backgroundTint="@android:color/transparent"
         app:tint="@color/theme_brown" />
 

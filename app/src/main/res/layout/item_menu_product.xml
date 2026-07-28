@@ -85,6 +85,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:background="@drawable/bg_circle_outline_brown"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:padding="5dp"
             android:src="@drawable/ic_plus"
             app:tint="@color/theme_brown"

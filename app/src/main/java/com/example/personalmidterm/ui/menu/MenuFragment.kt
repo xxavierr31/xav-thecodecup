@@ -99,18 +99,23 @@ class MenuFragment : Fragment() {
     }
 
     private fun updateFilterUi(category: Category) {
+        val brown = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.theme_brown))
+        val cream = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.card_cream))
+        val white = requireContext().getColor(R.color.white)
+        val grey = requireContext().getColor(R.color.text_secondary)
+
         if (category == Category.SPECIAL) {
-            binding.btnTabSeasonal.setBackgroundColor(requireContext().getColor(R.color.theme_brown))
-            binding.btnTabSeasonal.setTextColor(requireContext().getColor(R.color.white))
+            binding.btnTabSeasonal.backgroundTintList = brown
+            binding.btnTabSeasonal.setTextColor(white)
             
-            binding.btnTabClassics.setBackgroundColor(requireContext().getColor(R.color.card_cream))
-            binding.btnTabClassics.setTextColor(requireContext().getColor(R.color.text_secondary))
+            binding.btnTabClassics.backgroundTintList = cream
+            binding.btnTabClassics.setTextColor(grey)
         } else {
-            binding.btnTabSeasonal.setBackgroundColor(requireContext().getColor(R.color.card_cream))
-            binding.btnTabSeasonal.setTextColor(requireContext().getColor(R.color.text_secondary))
+            binding.btnTabSeasonal.backgroundTintList = cream
+            binding.btnTabSeasonal.setTextColor(grey)
             
-            binding.btnTabClassics.setBackgroundColor(requireContext().getColor(R.color.theme_brown))
-            binding.btnTabClassics.setTextColor(requireContext().getColor(R.color.white))
+            binding.btnTabClassics.backgroundTintList = brown
+            binding.btnTabClassics.setTextColor(white)
         }
     }
 

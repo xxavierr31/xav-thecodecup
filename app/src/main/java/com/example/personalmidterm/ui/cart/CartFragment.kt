@@ -111,12 +111,17 @@ class CartFragment : Fragment() {
                 launch {
                     viewModel.cartItems.collect { items ->
                         adapter.submitList(items)
-                        binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
-                        binding.rvCartItems.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
-                        binding.btnCheckout.isEnabled = items.isNotEmpty()
+                        val isEmpty = items.isEmpty()
+                        binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
+                        binding.rvCartItems.visibility = if (isEmpty) View.GONE else View.VISIBLE
+                        binding.btnCheckout.isEnabled = !isEmpty
+                        
+                        // Hide bottom bar summary if empty
+                        binding.bottomBar.visibility = if (isEmpty) View.GONE else View.VISIBLE
+                        binding.cartSummaryGroup.visibility = if (isEmpty) View.GONE else View.VISIBLE
                         
                         // Hide voucher icon if cart is empty
-                        binding.header.cartIcon.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+                        binding.header.cartIcon.visibility = if (isEmpty) View.GONE else View.VISIBLE
                     }
                 }
                 launch {

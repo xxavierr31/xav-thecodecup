@@ -1,68 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/card_cream"
-    android:padding="16dp">
-    <TextView
-        android:id="@+id/confirm_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.22"
-        android:text="Order Confirmed"
-        android:fontFamily="@font/playfairdisplay_bold"
-        android:textColor="@color/theme_brown"
-        android:textSize="40sp"
-        />
-    <TextView
-        android:id="@+id/confirm_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/confirm_heading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        android:text="Your brew is being prepared with\n care and will be ready for pickup shortly."
-        android:lineHeight="28dp"
-        android:textAlignment="center"
-        android:fontFamily="@font/manrope_regular"
-        android:textColor="@color/text_secondary"
-        android:textSize="16sp"
-        />
-    <ImageView
-        android:id="@+id/placeholder_img_order"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toBottomOf="@id/confirm_msg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        app:tint="@color/text_secondary"
-        android:src="@drawable/order_complete"
-        />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/track_order_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/placeholder_img_order"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Track My Orders"
-        android:fontFamily="@font/manrope_bold"
-        android:textAllCaps="false"
-        android:textSize="14sp"
-        android:backgroundTint="@color/theme_brown"
-        android:paddingVertical="16dp"
-        app:cornerRadius="9999dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginHorizontal="32dp"
-        >
+    android:fillViewport="true"
+    android:background="@color/card_cream">
 
-    </com.google.android.material.button.MaterialButton>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/confirm_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/playfairdisplay_bold"
+            android:text="Order Confirmed"
+            android:textColor="@color/theme_brown"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.22" />
+
+        <TextView
+            android:id="@+id/confirm_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/manrope_regular"
+            android:lineHeight="28dp"
+            android:text="Your brew is being prepared with\n care and will be ready for pickup shortly."
+            android:textAlignment="center"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirm_heading" />
+
+        <ImageView
+            android:id="@+id/placeholder_img_order"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/order_complete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirm_msg"
+            app:tint="@color/text_secondary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/track_order_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/theme_brown"
+            android:fontFamily="@font/manrope_bold"
+            android:paddingVertical="16dp"
+            android:text="Track My Orders"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:cornerRadius="9999dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/placeholder_img_order" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,42 +1,49 @@
-# Implementation Plan - Menu Search Bar
+# Implementation Plan - Checkout UI Structural Refinement
 
-This plan adds a search bar to the Menu screen, allowing users to filter the coffee catalog by name while maintaining their selected category (Specials/Classics).
+This plan reorders the checkout breakdown in the Cart screen to place the expansion toggle at the top and ensures the original subtotal (crossed out) is always visible when discounts are active.
 
 ## User Review Required
 
 > [!NOTE]
-> The search bar will filter the menu in real-time as the user types. It works in conjunction with the existing category tabs.
+> **New Breakdown Hierarchy**:
+> 1. Header: Expansion Arrow + "Total" Label
+> 2. Collapsible List: Subtotal, Rank Perk, Voucher Savings
+> 3. Final Summary: Strikethrough Subtotal + Final Price
+>
+> **Smart Disabling**: If no discounts are active (user is at Sprout rank and no voucher is selected), the expansion toggle will be hidden, and the screen will show a simplified "Total" row.
 
 ## Proposed Changes
 
-### 1. Menu Layout Enhancement
+### 1. Checkout UI Reordering
 
-#### [MODIFY] [fragment_menu.xml](file:///C:/Users/ntdan/AndroidStudioProjects/PersonalMidterm/app/src/main/res/layout/fragment_menu.xml)
-- Add a `MaterialCardView` containing a `TextInputEditText` for the search bar between the screen subtitle and the filter tabs.
-- Style the search bar with rounded corners, a subtle stroke, and a search icon.
-- Update the top constraints of the filter tabs to anchor to the bottom of the new search bar.
+#### [MODIFY] [fragment_cart.xml](file:///C:/Users/ntdan/AndroidStudioProjects/PersonalMidterm/app/src/main/res/layout/fragment_cart.xml)
+- **Top Row**: Move the `total_row` (Toggle Button + "Total" label) to the top of the `bottom_bar` section.
+- **Middle Section**: Place `breakdown_container` directly below the top row.
+- **Bottom Section**: Group `tv_old_total_val` and `tv_estimated_total_val` into a dedicated summary row at the bottom of the calculation block.
+- **Divider**: Reposition the divider to sit between the breakdown and the final summary row.
 
-### 2. ViewModel Logic
+### 2. Visibility & Interaction Logic
 
-#### [MODIFY] [MenuViewModel.kt](file:///C:/Users/ntdan/AndroidStudioProjects/PersonalMidterm/app/src/main/java/com/example/personalmidterm/ui/menu/MenuViewModel.kt)
-- Add `private val _searchQuery = MutableStateFlow("")`.
-- Add `val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()`.
-- Implement `fun updateSearchQuery(query: String)`.
-- Refactor `filteredCoffees` to combine `coffeeRepository.allCoffees`, `_selectedCategory`, and `_searchQuery`. The logic will first filter by category, then filter by name containing the query (case-insensitive).
+#### [MODIFY] [CartFragment.kt](file:///C:/Users/ntdan/AndroidStudioProjects/PersonalMidterm/app/src/main/java/com/example/personalmidterm/ui/cart/CartFragment.kt)
+- **Toggle Visibility**: Hide the `btn_toggle_breakdown` if `state.isRankDiscountVisible` and `state.isVoucherDiscountVisible` are both false.
+- **Breakdown State**: Ensure the `breakdown_container` is forced to `GONE` if no discounts are active, preventing an empty breakdown from being expanded.
+- **Total Alignment**: Adjust the "Total" label styling to act as a clear header when expanded.
 
-### 3. Fragment Wiring
+### 3. Voucher Selection Feedback
 
-#### [MODIFY] [MenuFragment.kt](file:///C:/Users/ntdan/AndroidStudioProjects/PersonalMidterm/app/src/main/java/com/example/personalmidterm/ui/menu/MenuFragment.kt)
-- Add a `doOnTextChanged` listener (or `TextWatcher`) to the search `EditText` to update the ViewModel's search query.
-- Ensure the search bar state is preserved if needed (though `ViewModel` handles this automatically).
+#### [MODIFY] [item_voucher.xml](file:///C:/Users/ntdan/AndroidStudioProjects/PersonalMidterm/app/src/main/res/layout/item_voucher.xml)
+- Ensure the `RadioButton` is vertically centered and visually prominent on the right side of the card.
+- (Note: Selection logic is already implemented in `VoucherAdapter`).
 
 ## Verification Plan
 
 ### Manual Verification
-1.  **Typing**: Type "Latte" in the search bar. Verify the list only shows drinks with "Latte" in the name.
-2.  **Category + Search**:
-    - Select "Specials".
-    - Type "Matcha".
-    - Verify only Special Matcha drinks are shown.
-3.  **Clear Search**: Clear the search bar and verify the list returns to showing all drinks in the selected category.
-4.  **Case Insensitivity**: Verify that searching for "latte" also finds "Classic Latte".
+1.  **Discount Active**: Apply a voucher.
+    *   Verify the toggle arrow appears at the top.
+    *   Verify you can expand it to see Subtotal, Rank discount, and Voucher discount.
+    *   Verify the crossed-out subtotal is visible next to the final price.
+2.  **No Discount**: Clear the voucher (if "Sprout").
+    *   Verify the toggle arrow is hidden.
+    *   Verify the detailed breakdown is hidden.
+    *   Verify only the final price is shown (no strikethrough).
+3.  **Visual Stack**: Confirm the vertical order: Toggle Header -> Breakdown List -> Strikethrough Summary.
