@@ -195,8 +195,6 @@ class DetailsFragment : Fragment() {
     private fun updateTemperatureButtonAvailability(coffee: Coffee) {
         binding.btnTempIced.alpha = if (coffee.canBeIced) 1.0f else 0.4f
         binding.btnTempHot.alpha = if (coffee.canBeHot) 1.0f else 0.4f
-        
-        // We don't disable them so they can still trigger the Toast click listener
     }
 
     private fun bindCustomization(c: Customization) {

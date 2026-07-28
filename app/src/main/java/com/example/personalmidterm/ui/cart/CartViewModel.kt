@@ -132,6 +132,12 @@ class CartViewModel(
             if (items.isNotEmpty()) {
                 val address = profileRepository.profile.value.address
                 val orderId = orderRepository.placeOrder(items, total.value, address)
+                
+                // If a voucher was used, remove it from the user's list
+                selectedVoucher.value?.let { voucher ->
+                    voucherRepository.useVoucher(voucher.id)
+                }
+                
                 cartRepository.clearCart()
                 voucherRepository.clearSelectedVoucher()
                 onSuccess(orderId)

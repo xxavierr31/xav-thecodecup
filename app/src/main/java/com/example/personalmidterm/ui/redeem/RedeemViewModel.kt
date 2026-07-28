@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class RedeemViewModel(
     private val redeemableRepository: RedeemableRepository,
+    private val rewardRepository: com.example.personalmidterm.data.repository.RewardRepository,
     private val loyaltyPrefs: LoyaltyPrefs
 ) : ViewModel() {
 
@@ -32,15 +33,7 @@ class RedeemViewModel(
 
     fun redeem(item: RedeemableItem) {
         viewModelScope.launch {
-            val state = loyaltyState.value
-            if (state.totalPoints >= item.pointsCost) {
-                loyaltyPrefs.updateLoyalty(
-                    stamps = state.stamps,
-                    totalPoints = state.totalPoints - item.pointsCost,
-                    rankIndex = state.rankIndex
-                )
-                // In a real app, we'd also record a transaction and give the user a coupon
-            }
+            rewardRepository.redeemPoints(item.pointsCost, "Redeemed: ${item.name}")
         }
     }
 }

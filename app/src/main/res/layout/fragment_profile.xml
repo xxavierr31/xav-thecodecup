@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- HEADER — pinned -->
     <include
         android:id="@+id/header"
         layout="@layout/layout_app_header"
@@ -172,7 +171,6 @@
                 app:layout_constraintEnd_toStartOf="@id/btn_edit_details"
                 app:layout_constraintTop_toBottomOf="@id/tag_badge_bg" />
 
-            <!-- EDIT (PENCIL) BUTTON — visible in display mode -->
             <ImageButton
                 android:id="@+id/btn_edit_details"
                 android:layout_width="32dp"
@@ -185,7 +183,6 @@
                 app:layout_constraintTop_toTopOf="@id/tv_details_title"
                 app:layout_constraintBottom_toBottomOf="@id/tv_details_title" />
 
-            <!-- SAVE (CHECK) BUTTON — visible in edit mode, hidden by default -->
             <ImageButton
                 android:id="@+id/btn_save_details"
                 android:layout_width="32dp"

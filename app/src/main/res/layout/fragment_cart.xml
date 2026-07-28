@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- HEADER — pinned -->
+    <!-- HEADER pinned -->
     <include
         android:id="@+id/header"
         layout="@layout/layout_app_header"
@@ -43,7 +43,7 @@
                 tools:listitem="@layout/item_cart"
                 tools:itemCount="3" />
 
-            <!-- EMPTY STATE — hidden by default, toggle visibility when cart is empty -->
+            <!-- EMPTY STATE hidden by default, toggle visibility when cart is empty -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/empty_state"
                 android:layout_width="0dp"
@@ -119,7 +119,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- BOTTOM BAR — pinned -->
+    <!-- BOTTOM BAR pinned -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_bar"
         android:layout_width="0dp"

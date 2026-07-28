@@ -14,4 +14,7 @@ interface VoucherDao {
 
     @Query("SELECT * FROM vouchers WHERE id = :id")
     suspend fun getVoucherById(id: Long): VoucherEntity?
+
+    @Query("DELETE FROM vouchers WHERE id = :id")
+    suspend fun deleteVoucherById(id: Long)
 }

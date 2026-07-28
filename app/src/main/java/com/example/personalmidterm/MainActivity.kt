@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.loadingScreenFragment,
                 R.id.detailsFragment,
                 R.id.cartFragment,
+                R.id.voucherFragment,
                 R.id.orderSuccessFragment,
                 R.id.redeemFragment
             )
@@ -61,19 +62,29 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupCustomNavbar(navController: androidx.navigation.NavController) {
         binding.bottomNavCustom.nav1Group.setOnClickListener {
-            navController.navigate(R.id.menuFragment)
+            if (navController.currentDestination?.id != R.id.menuFragment) {
+                navController.navigate(R.id.menuFragment)
+            }
         }
         binding.bottomNavCustom.nav2Group.setOnClickListener {
-            navController.navigate(R.id.rewardsFragment)
+            if (navController.currentDestination?.id != R.id.rewardsFragment) {
+                navController.navigate(R.id.rewardsFragment)
+            }
         }
         binding.bottomNavCustom.nav3Group.setOnClickListener {
-            navController.navigate(R.id.homeFragment)
+            if (navController.currentDestination?.id != R.id.homeFragment) {
+                navController.navigate(R.id.homeFragment)
+            }
         }
         binding.bottomNavCustom.nav4Group.setOnClickListener {
-            navController.navigate(R.id.profileFragment)
+            if (navController.currentDestination?.id != R.id.profileFragment) {
+                navController.navigate(R.id.profileFragment)
+            }
         }
         binding.bottomNavCustom.nav5Group.setOnClickListener {
-            navController.navigate(R.id.myOrdersFragment)
+            if (navController.currentDestination?.id != R.id.myOrdersFragment) {
+                navController.navigate(R.id.myOrdersFragment)
+            }
         }
     }
 

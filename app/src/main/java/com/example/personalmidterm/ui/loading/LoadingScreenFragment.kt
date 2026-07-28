@@ -29,7 +29,6 @@ class LoadingScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Linger for 2 seconds before navigating to Home
         viewLifecycleOwner.lifecycleScope.launch {
             delay(1000)
             if (isAdded) {

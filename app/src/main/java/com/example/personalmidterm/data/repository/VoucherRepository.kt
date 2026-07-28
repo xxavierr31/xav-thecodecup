@@ -26,4 +26,9 @@ class VoucherRepository(private val voucherDao: VoucherDao) {
     fun clearSelectedVoucher() {
         _selectedVoucher.value = null
     }
+
+    suspend fun useVoucher(voucherId: Long) {
+        clearSelectedVoucher()
+        voucherDao.deleteVoucherById(voucherId)
+    }
 }

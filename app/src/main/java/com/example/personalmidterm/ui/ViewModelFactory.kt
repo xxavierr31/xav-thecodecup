@@ -53,7 +53,7 @@ object ViewModelFactory {
                     RewardsViewModel(container.rewardRepository, container.loyaltyPrefs) as T
                 }
                 modelClass.isAssignableFrom(RedeemViewModel::class.java) -> {
-                    RedeemViewModel(container.redeemableRepository, container.loyaltyPrefs) as T
+                    RedeemViewModel(container.redeemableRepository, container.rewardRepository, container.loyaltyPrefs) as T
                 }
                 modelClass.isAssignableFrom(MyOrdersViewModel::class.java) -> {
                     MyOrdersViewModel(container.orderRepository) as T
