@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalmidterm.databinding.ItemCartBinding
 import com.example.personalmidterm.model.CartItem
-import com.example.personalmidterm.model.Temperature
 import com.example.personalmidterm.util.CurrencyFormatter
 
 class CartAdapter(
@@ -41,20 +40,7 @@ class CartAdapter(
 
         fun bind(item: CartItem) {
             binding.tvItemTitle.text = item.coffee.name
-            
-            val customizationText = buildString {
-                append("${item.customization.temperature.label}, ")
-                append("${item.customization.sweetness.label} Sweet, ")
-                
-                val levelLabel = if (item.customization.temperature == Temperature.ICED) "Ice" else "Heat"
-                append("${item.customization.temperatureLevel.label} $levelLabel")
-                
-                if (item.customization.flavors.isNotEmpty()) {
-                    append(", ")
-                    append(item.customization.flavors.joinToString(", ") { it.label })
-                }
-            }
-            binding.tvItemSubtitle.text = customizationText
+            binding.tvItemSubtitle.text = item.customization.getDescription()
             binding.tvItemPrice.text = CurrencyFormatter.format(item.unitPrice)
             binding.tvQtyCount.text = item.quantity.toString()
             binding.ivItemImage.setImageResource(item.coffee.imageRes)

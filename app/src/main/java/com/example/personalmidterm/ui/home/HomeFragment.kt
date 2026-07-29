@@ -46,13 +46,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupHeader() {
-        binding.header.userAvatar.visibility = View.VISIBLE
+        binding.header.userAvatarContainer.visibility = View.VISIBLE
         binding.header.greetingContainer.visibility = View.VISIBLE
         binding.header.cartIcon.setImageResource(R.drawable.ic_cart)
         binding.header.cartIcon.visibility = View.VISIBLE
         binding.header.favoriteIcon.visibility = View.GONE
         
-        binding.header.userAvatar.setOnClickListener {
+        binding.header.userAvatarContainer.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
         }
         binding.header.cartIcon.setOnClickListener {
@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
                 launch {
                     viewModel.profile.collect { profile ->
                         val greeting = getGreeting()
-                        val padding = (8 * resources.displayMetrics.density).toInt()
+                        val padding = (15 * resources.displayMetrics.density).toInt()
                         binding.header.greetingText.text = "$greeting, ${profile.name}"
                         
                         if (profile.imagePath != null) {
@@ -104,15 +104,18 @@ class HomeFragment : Fragment() {
                             if (file.exists()) {
                                 binding.header.userAvatar.setPadding(0, 0, 0, 0)
                                 binding.header.userAvatar.imageTintList = null
+                                binding.header.userAvatar.scaleType = android.widget.ImageView.ScaleType.CENTER_CROP
                                 binding.header.userAvatar.setImageURI(Uri.fromFile(file))
                             } else {
                                 binding.header.userAvatar.setPadding(padding, padding, padding, padding)
-                                binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.theme_brown))
+                                binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+                                binding.header.userAvatar.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
                                 binding.header.userAvatar.setImageResource(R.drawable.profile)
                             }
                         } else {
                             binding.header.userAvatar.setPadding(padding, padding, padding, padding)
-                            binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.theme_brown))
+                            binding.header.userAvatar.imageTintList = android.content.res.ColorStateList.valueOf(requireContext().getColor(R.color.bg_grey))
+                            binding.header.userAvatar.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
                             binding.header.userAvatar.setImageResource(R.drawable.profile)
                         }
                     }

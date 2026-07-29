@@ -50,6 +50,8 @@ class DetailsViewModel(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0L)
 
     fun loadCoffee(id: Long, initialCustomization: Customization? = null) {
+        if (_coffee.value != null) return // Already loaded, don't overwrite current state
+
         viewModelScope.launch {
             val coffee = coffeeRepository.getCoffeeById(id)
             _coffee.value = coffee

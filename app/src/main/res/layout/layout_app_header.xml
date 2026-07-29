@@ -18,19 +18,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/user_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/profile"
-        android:scaleType="fitCenter"
-        android:padding="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:backgroundTint="@android:color/transparent"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/user_avatar_container"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:visibility="gone"
+        app:cardCornerRadius="9999dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/card_cream"
+        app:strokeWidth="3dp"
+        app:strokeColor="#E6E2DB"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/user_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile"
+            android:scaleType="fitCenter"
+            android:padding="15dp"
+            app:tint="#E6E2DB"
+            android:clickable="false"
+            android:focusable="false"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
         android:id="@+id/greeting_container"
@@ -40,7 +58,7 @@
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/user_avatar"
+        app:layout_constraintStart_toEndOf="@id/user_avatar_container"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

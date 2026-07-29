@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalmidterm.databinding.ItemRecipeBinding
 import com.example.personalmidterm.model.Favorite
-import com.example.personalmidterm.model.Temperature
 import com.example.personalmidterm.util.CurrencyFormatter
 
 class SavedRecipeAdapter(
@@ -42,23 +41,7 @@ class SavedRecipeAdapter(
             binding.heroImage.setImageResource(favorite.coffee.imageRes)
             
             // Customization summary
-            val customizationText = buildString {
-                append("${favorite.customization.temperature.label}, ")
-                append("${favorite.customization.sweetness.label} Sweet, ")
-                
-                val levelLabel = if (favorite.customization.temperature == Temperature.ICED) "Ice" else "Heat"
-                append("${favorite.customization.temperatureLevel.label} $levelLabel")
-                
-                if (favorite.customization.shots > 0) {
-                    append(", ${favorite.customization.shots} extra shots")
-                }
-                
-                if (favorite.customization.flavors.isNotEmpty()) {
-                    append(", ")
-                    append(favorite.customization.flavors.joinToString(", ") { it.label })
-                }
-            }
-            binding.recipeDetails.text = customizationText
+            binding.recipeDetails.text = favorite.customization.getDescription()
             
             // Price calculation
             val flavorSurcharge = favorite.customization.flavors.size * 5000L

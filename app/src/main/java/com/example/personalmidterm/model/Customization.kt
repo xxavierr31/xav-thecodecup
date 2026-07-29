@@ -41,4 +41,21 @@ data class Customization(
     val temperatureLevel: TemperatureLevel = TemperatureLevel.FIFTY,
     val shots: Int = 0,
     val flavors: List<Flavor> = emptyList()
-) : Parcelable
+) : Parcelable {
+    fun getDescription(): String = buildString {
+        append("${temperature.label}, ")
+        append("${sweetness.label} Sweet, ")
+
+        val levelLabel = if (temperature == Temperature.ICED) "Ice" else "Heat"
+        append("${temperatureLevel.label} $levelLabel")
+
+        if (shots > 0) {
+            append(", $shots extra ${if (shots == 1) "shot" else "shots"}")
+        }
+
+        if (flavors.isNotEmpty()) {
+            append(", ")
+            append(flavors.joinToString(", ") { it.label })
+        }
+    }
+}
